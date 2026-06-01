@@ -110,14 +110,16 @@
         .exercise-img {
             max-width: 100%;
             height: auto;
+            max-height: 350px;
             border-radius: 8px;
             border: 1px solid #ddd;
+            object-fit: contain;
         }
         
         .sol-img {
             max-width: 100%;
-            width: 550px;
             height: auto;
+            max-height: 450px;
             margin: 15px 0;
             border-radius: 6px;
             border: 1px solid var(--success-color);
@@ -145,9 +147,6 @@
             color: var(--primary-color);
             margin-bottom: 8px;
             font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
 
         .submission-methods {
@@ -165,15 +164,14 @@
 
         .input-group label { font-weight: 500; font-size: 0.9rem; color: #555; }
         .answer-input {
-            padding: 6px 12px;
+            padding: 8px 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 0.95rem;
-            width: 300px;
+            width: 320px;
             max-width: 100%;
         }
 
-        /* Thiết kế khu vực tải ảnh lên */
         .upload-group {
             display: flex;
             align-items: center;
@@ -182,7 +180,7 @@
         }
         .file-label {
             display: inline-block;
-            padding: 5px 12px;
+            padding: 6px 14px;
             background-color: #fff;
             border: 1px solid #b3d7ff;
             color: #0056b3;
@@ -195,7 +193,6 @@
         .file-label:hover { background-color: #e6f2ff; }
         .file-input { display: none; }
         
-        /* Xem trước ảnh học sinh chụp */
         .preview-container {
             display: none;
             margin-top: 8px;
@@ -209,7 +206,7 @@
 
         .btn-group { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; align-items: center; }
         .btn {
-            padding: 10px 20px;
+            padding: 10px 22px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -235,7 +232,7 @@
         .btn-vid:hover { background-color: #c0392b; }
 
         .solution-box {
-            display: none; /* Giấu tuyệt đối */
+            display: none;
             margin-top: 20px;
             padding: 20px;
             background-color: #eef7f2;
@@ -260,7 +257,7 @@
 <div class="container">
     <header>
         <h1>HỆ THỐNG ÔN LUYỆN TOÁN VÀO LỚP 10</h1>
-        <p class="subtitle">Nộp bài riêng biệt theo từng câu hỏi nhỏ - Chuẩn hóa hình ảnh đáp án</p>
+        <p class="subtitle">Nộp bài độc lập từng câu hỏi nhỏ (a, b, c) & Đáp án trực quan chuẩn hóa hình ảnh</p>
     </header>
 
     <div class="tabs">
@@ -269,13 +266,13 @@
     </div>
 
     <div id="exam24" class="exam-panel active">
-        <div class="exercise-box">
+        <div class="exercise-box" id="box-24-1">
             <div class="exercise-title">Bài 1 (1,5 điểm)</div>
             <p>Cho Parabol $(P): y = x^2$.</p>
             <p>a) Vẽ đồ thị hàm số $(P)$ lên mặt phẳng tọa độ.</p>
             <p>b) Tìm điểm $A$ thuộc $(P)$ khác gốc tọa độ có hoành độ gấp ba lần tung độ.</p>
             
-            <div class="student-action" id="action-24-1">
+            <div class="student-action">
                 <div class="part-submission">
                     <div class="part-title">↳ Câu a) Vẽ đồ thị hàm số (P):</div>
                     <div class="submission-methods">
@@ -293,12 +290,11 @@
                     <div class="part-title">↳ Câu b) Tìm tọa độ điểm A:</div>
                     <div class="submission-methods">
                         <div class="input-group">
-                            <label>Cách 1: Nhập đáp số nhanh:</label>
-                            <input type="text" class="answer-input" id="text-24-1-b" placeholder="Ví dụ: (1/3; 1/9)">
+                            <label>Nhập đáp số nhanh:</label>
+                            <input type="text" class="answer-input" id="text-24-1-b" placeholder="Nhập hoành độ và tung độ...">
                         </div>
-                        <div class="upload-group">
-                            <label>Cách 2: Hoặc tải ảnh các bước giải:</label>
-                            <label class="file-label" for="file-24-1-b">📸 Chụp hình / Chọn ảnh</label>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-24-1-b">📸 Chụp hình các bước giải</label>
                             <input type="file" id="file-24-1-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-1-b')">
                             <div class="preview-container" id="prev-24-1-b">
                                 <img src="" class="preview-img" alt="Xem trước bài làm">
@@ -308,34 +304,43 @@
                 </div>
 
                 <div class="btn-group">
-                    <button class="btn btn-submit" onclick="submitAndShow('24-1', ['24-1-a', '24-1-b'])">📤 Nộp bài làm & Xem đáp án</button>
+                    <button class="btn btn-submit" onclick="submitAndShow('24-1')">📤 Nộp bài & Xem đáp án</button>
                     <a href="https://www.youtube.com/watch?v=aFfLMdp_1QE&list=PL3yjsAgvkjdTkfpe6h5PbWpIAec4rq0yD" target="_blank" class="btn-vid">🎬 Video Đồ thị Parabol</a>
                 </div>
                 
                 <div id="sol-24-1" class="solution-box">
                     <div class="solution-header">✓ ĐÁP ÁN CHÍNH THỨC</div>
-                    <strong>Hướng dẫn giải câu a và b):</strong><br>
-                    a) Bảng giá trị và đồ thị minh họa:<br>
+                    <strong>Hướng dẫn giải:</strong><br>
+                    a) Tập xác định $\mathbb{R}$. Bảng giá trị mẫu:
+                    <table border="1" cellpadding="5" style="border-collapse:collapse; text-align:center; margin: 10px 0;">
+                        <tr><td>$x$</td><td>-2</td><td>-1</td><td>0</td><td>1</td><td>2</td></tr>
+                        <tr><td>$y = x^2$</td><td>4</td><td>1</td><td>0</td><td>1</td><td>4</td></tr>
+                    </table>
+                    Hình ảnh đồ thị $(P)$ minh họa chính xác (không bị vỡ hình):<br>
                     <div class="image-container">
                         <img src="De24.Bai1.Da.png" alt="Đồ thị Parabol P Đề 24" class="sol-img">
                     </div>
-                    b) Hoành độ gấp 3 lần tung độ suy ra $x_A = 3y_A$. Thay vào phương trình đồ thị ta được: $y_A = (3y_A)^2 \Leftrightarrow y_A = 9y_A^2$. Do điểm $A$ khác gốc tọa độ nên $y_A \neq 0 \Rightarrow y_A = \frac{1}{9}$. Từ đó suy ra $x_A = 3 \cdot \frac{1}{9} = \frac{1}{3}$. Vậy tọa độ điểm cần tìm là $A\left(\frac{1}{3}; \frac{1}{9}\right)$.
+                    b) Gọi tọa độ điểm $A(x_A; y_A) \in (P) \Rightarrow y_A = x_A^2$.<br>
+                    Theo đề bài: hoành độ gấp ba lần tung độ $\Rightarrow x_A = 3y_A$.<br>
+                    Thay vào phương trình ta được: $y_A = (3y_A)^2 \Leftrightarrow y_A = 9y_A^2 \Leftrightarrow y_A(9y_A - 1) = 0$.<br>
+                    Vì $A$ khác gốc tọa độ $O(0;0)$ nên $y_A \neq 0 \Rightarrow y_A = \frac{1}{9}$.<br>
+                    Suy ra $x_A = 3 \cdot \frac{1}{9} = \frac{1}{3}$. Vậy $A\left(\frac{1}{3}; \frac{1}{9}\right)$.
                 </div>
             </div>
         </div>
 
-        <div class="exercise-box">
+        <div class="exercise-box" id="box-24-2">
             <div class="exercise-title">Bài 2 (1,5 điểm)</div>
             <p>Cho phương trình $x^2 - mx - 2 = 0$ ($m$ là tham số).</p>
             <p>a) Chứng minh phương trình luôn có hai nghiệm phân biệt với mọi $m$.</p>
             <p>b) Gọi $x_1, x_2$ là hai nghiệm của phương trình. Không giải phương trình, tính giá trị của biểu thức: $$M = \frac{x_1^2 + x_1 - 2}{x_1} - \frac{x_2^2 + x_2 - 2}{x_2}$$</p>
             
-            <div class="student-action" id="action-24-2">
+            <div class="student-action">
                 <div class="part-submission">
                     <div class="part-title">↳ Câu a) Chứng minh phương trình luôn có 2 nghiệm phân biệt:</div>
                     <div class="submission-methods">
                         <div class="upload-group">
-                            <label class="file-label" for="file-24-2-a">📸 Chụp hình chứng minh (Xét a.c hoặc Delta)</label>
+                            <label class="file-label" for="file-24-2-a">📸 Chụp ảnh bài chứng minh</label>
                             <input type="file" id="file-24-2-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-2-a')">
                             <div class="preview-container" id="prev-24-2-a">
                                 <img src="" class="preview-img" alt="Xem trước bài làm">
@@ -348,12 +353,11 @@
                     <div class="part-title">↳ Câu b) Tính giá trị biểu thức M:</div>
                     <div class="submission-methods">
                         <div class="input-group">
-                            <label>Cách 1: Nhập kết quả M =</label>
-                            <input type="text" class="answer-input" id="text-24-2-b" placeholder="Nhập giá trị số">
+                            <label>Nhập kết quả M =</label>
+                            <input type="text" class="answer-input" id="text-24-2-b" placeholder="Kết quả rút gọn...">
                         </div>
-                        <div class="upload-group">
-                            <label>Cách 2: Tải ảnh các bước biến đổi Vi-ét:</label>
-                            <label class="file-label" for="file-24-2-b">📸 Chụp hình / Chọn ảnh</label>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-24-2-b">📸 Chụp ảnh các bước biến đổi Vi-ét</label>
                             <input type="file" id="file-24-2-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-2-b')">
                             <div class="preview-container" id="prev-24-2-b">
                                 <img src="" class="preview-img" alt="Xem trước bài làm">
@@ -363,73 +367,60 @@
                 </div>
 
                 <div class="btn-group">
-                    <button class="btn btn-submit" onclick="submitAndShow('24-2', ['24-2-a', '24-2-b'])">📤 Nộp bài làm & Xem đáp án</button>
+                    <button class="btn btn-submit" onclick="submitAndShow('24-2')">📤 Nộp bài & Xem đáp án</button>
                     <a href="https://www.youtube.com/watch?v=3_T_8jF6li8" target="_blank" class="btn-vid">🎬 Video Hệ thức Vi-ét cơ bản</a>
                 </div>
                 
                 <div id="sol-24-2" class="solution-box">
                     <div class="solution-header">✓ ĐÁP ÁN CHÍNH THỨC</div>
                     <strong>Hướng dẫn giải:</strong><br>
-                    a) Ta thấy hệ số $a = 1$ và $c = -2$ trái dấu ($a \cdot c = -2 < 0$), do đó phương trình luôn luôn có 2 nghiệm phân biệt với mọi $m$ (hoặc xét $\Delta = m^2 + 8 > 0$ với mọi $m$).<br>
-                    b) Áp dụng Định lý Vi-ét ta có: $x_1 + x_2 = m$ và $x_1 x_2 = -2$. Tách biểu thức:
-                    $$M = \left(\frac{x_1^2 - 2}{x_1} + \frac{x_1}{x_1}\right) - \left(\frac{x_2^2 - 2}{x_2} + \frac{x_2}{x_2}\right)$$
-                    Vì $x_1, x_2$ là nghiệm nên $x_1^2 - 2 = mx_1$ và $x_2^2 - 2 = mx_2$. Thay vào ta có:
-                    $$M = \left(\frac{mx_1}{x_1} + 1\right) - \left(\frac{mx_2}{x_2} + 1\right) = (m + 1) - (m + 1) = 0$$
+                    a) Phương trình có hệ số $a = 1, b = -m, c = -2$. Ta có $a \cdot c = 1 \cdot (-2) = -2 < 0$ với mọi $m$. Vì $a, c$ trái dấu nên phương trình luôn có 2 nghiệm phân biệt với mọi $m$. (Hoặc tính $\Delta = (-m)^2 - 4 \cdot 1 \cdot (-2) = m^2 + 8 > 0, \forall m$).<br>
+                    b) Do $x_1, x_2$ là nghiệm của phương trình nên: $x_1^2 - mx_1 - 2 = 0 \Rightarrow x_1^2 - 2 = mx_1$ và $x_2^2 - 2 = mx_2$. Thay vào biểu thức $M$:
+                    $$M = \frac{mx_1 + x_1}{x_1} - \frac{mx_2 + x_2}{x_2} = \frac{x_1(m + 1)}{x_1} - \frac{x_2(m + 1)}{x_2} = (m + 1) - (m + 1) = 0$$
                 </div>
             </div>
         </div>
 
-        <div class="exercise-box">
+        <div class="exercise-box" id="box-24-3">
             <div class="exercise-title">Bài 3 (1,0 điểm)</div>
             <p>Một hộp chứa các viên bi màu vàng và màu đỏ có kích thước và khối lượng như nhau. Lan lấy ra ngẫu nhiên một viên bi từ hộp, xem màu rồi trả lại.</p>
             <p>a) Lặp lại thử nghiệm đó 80 lần, Lan thấy có 25 lần lấy được viên bi màu đỏ. Hãy tính xác suất thực nghiệm của biến cố Lan "lấy được viên bi màu vàng" sau 80 lần thử.</p>
             <p>b) Biết hộp đó chứa 6 viên bi màu đỏ và một số viên bi màu vàng. Xác suất của biến cố lấy được viên bi màu đỏ ban đầu là $0,4$. Hỏi trong hộp có tất cả bao nhiêu viên bi?</p>
             
-            <div class="student-action" id="action-24-3">
+            <div class="student-action">
                 <div class="part-submission">
                     <div class="part-title">↳ Câu a) Xác suất thực nghiệm lấy viên bi vàng:</div>
-                    <div class="submission-methods">
-                        <div class="input-group">
-                            <label>Nhập phân số tối giản:</label>
-                            <input type="text" class="answer-input" id="text-24-3-a" placeholder="Ví dụ: 11/16">
-                        </div>
+                    <div class="input-group">
+                        <label>Nhập kết quả:</label>
+                        <input type="text" class="answer-input" id="text-24-3-a" placeholder="Dạng phân số hoặc số thập phân...">
                     </div>
                 </div>
 
                 <div class="part-submission">
-                    <div class="part-title">↳ Câu b) Tổng số viên bi ban đầu trong hộp:</div>
-                    <div class="submission-methods">
-                        <div class="input-group">
-                            <label>Nhập số lượng viên bi:</label>
-                            <input type="text" class="answer-input" id="text-24-3-b" placeholder="Ví dụ: 15">
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin: 5px 0 12px 12px;" class="upload-group">
-                    <label>Hoặc tải ảnh chụp bài giải chung (cả a và b):</label>
-                    <label class="file-label" for="file-24-3-all">📸 Chụp bài giải giấy tập</label>
-                    <input type="file" id="file-24-3-all" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-3-all')">
-                    <div class="preview-container" id="prev-24-3-all">
-                        <img src="" class="preview-img" alt="Xem trước bài làm">
+                    <div class="part-title">↳ Câu b) Tính tổng số viên bi ban đầu trong hộp:</div>
+                    <div class="input-group">
+                        <label>Nhập số lượng tổng số bi:</label>
+                        <input type="text" class="answer-input" id="text-24-3-b" placeholder="Tổng số viên bi...">
                     </div>
                 </div>
 
                 <div class="btn-group">
-                    <button class="btn btn-submit" onclick="submitAndShow('24-3', ['24-3-a', '24-3-b', '24-3-all'])">📤 Nộp bài làm & Xem đáp án</button>
-                    <a href="https://www.youtube.com/watch?v=9RlAs0vWieg" target="_blank" class="btn-vid">🎬 Video Thống kê & Xác suất P1</a>
+                    <button class="btn btn-submit" onclick="submitAndShow('24-3')">📤 Nộp bài & Xem đáp án</button>
+                    <a href="https://www.youtube.com/watch?v=9RlAs0vWieg" target="_blank" class="btn-vid">🎬 Video Xác suất thực nghiệm</a>
                 </div>
                 
                 <div id="sol-24-3" class="solution-box">
                     <div class="solution-header">✓ ĐÁP ÁN CHÍNH THỨC</div>
                     <strong>Hướng dẫn giải:</strong><br>
-                    a) Số lần bốc trúng viên bi màu vàng là: $80 - 25 = 55$ lần. Xác suất thực nghiệm tương ứng là: $\frac{55}{80} = \frac{11}{16}$.<br>
-                    b) Gọi tổng số viên bi trong hộp ban đầu là $N$. Dựa trên định nghĩa xác suất lý thuyết: $\frac{6}{N} = 0,4 \Rightarrow N = 6 : 0,4 = 15$ viên bi.
+                    a) Số lần Lan lấy được viên bi màu vàng là: $80 - 25 = 55$ (lần).<br>
+                    Xác suất thực nghiệm của biến cố "Lấy được viên bi màu vàng" là: $\frac{55}{80} = \frac{11}{16} = 0,6875$.<br>
+                    b) Gọi tổng số viên bi trong hộp là $N$ ($N \in \mathbb{N^*}$). Theo định nghĩa xác suất cổ điển, ta có:<br>
+                    $\frac{\text{Số bi đỏ}}{\text{Tổng số bi}} = 0,4 \Rightarrow \frac{6}{N} = 0,4 \Rightarrow N = \frac{6}{0,4} = 15$ (viên bi).
                 </div>
             </div>
         </div>
 
-        <div class="exercise-box">
+        <div class="exercise-box" id="box-24-4">
             <div class="exercise-title">Bài 4 (1,0 điểm)</div>
             <p>Bốn nửa hình tròn với bán kính là $2$ được đặt trong hình vuông $ABCD$ như hình bên.</p>
             <p>a) Viết biểu thức tính diện tích phần không tô màu theo $x$.</p>
@@ -439,52 +430,44 @@
                 <img src="De24.Bai4.png" alt="Hình minh họa Bài 4 Đề 24" class="exercise-img">
             </div>
 
-            <div class="student-action" id="action-24-4">
+            <div class="student-action">
                 <div class="part-submission">
-                    <div class="part-title">↳ Câu a) Biểu thức diện tích không tô màu theo x:</div>
-                    <div class="submission-methods">
-                        <div class="input-group">
-                            <label>Nhập biểu thức đại số:</label>
-                            <input type="text" class="answer-input" id="text-24-4-a" placeholder="Ví dụ: (4+x)^2 - 8pi">
-                        </div>
+                    <div class="part-title">↳ Câu a) Biểu thức diện tích phần không tô màu theo x:</div>
+                    <div class="input-group">
+                        <label>Nhập biểu thức:</label>
+                        <input type="text" class="answer-input" id="text-24-4-a" placeholder="Biểu thức đại số chứa x...">
                     </div>
                 </div>
 
                 <div class="part-submission">
-                    <div class="part-title">↳ Câu b) Diện tích hình vuông ABCD:</div>
-                    <div class="submission-methods">
-                        <div class="input-group">
-                            <label>Nhập giá trị chính xác:</label>
-                            <input type="text" class="answer-input" id="text-24-4-b" placeholder="Ví dụ: 16 + 8&radic;3">
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin: 5px 0 12px 12px;" class="upload-group">
-                    <label>Hoặc nộp hình chụp nháp tính toán hình học:</label>
-                    <label class="file-label" for="file-24-4-all">📸 Chụp ảnh bài làm</label>
-                    <input type="file" id="file-24-4-all" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-4-all')">
-                    <div class="preview-container" id="prev-24-4-all">
-                        <img src="" class="preview-img" alt="Xem trước bài làm">
+                    <div class="part-title">↳ Câu b) Tính diện tích hình vuông ABCD:</div>
+                    <div class="input-group">
+                        <label>Nhập giá trị số chính xác:</label>
+                        <input type="text" class="answer-input" id="text-24-4-b" placeholder="Giá trị diện tích cụ thể...">
                     </div>
                 </div>
 
                 <div class="btn-group">
-                    <button class="btn btn-submit" onclick="submitAndShow('24-4', ['24-4-a', '24-4-b', '24-4-all'])">📤 Nộp bài làm & Xem đáp án</button>
+                    <button class="btn btn-submit" onclick="submitAndShow('24-4')">📤 Nộp bài & Xem đáp án</button>
                 </div>
                 
                 <div id="sol-24-4" class="solution-box">
                     <div class="solution-header">✓ ĐÁP ÁN CHÍNH THỨC</div>
                     <strong>Hướng dẫn giải:</strong><br>
-                    a) Chiều dài cạnh hình vuông biểu diễn theo hình vẽ là $4 + x$. Diện tích của cả bốn nửa hình tròn ghép lại bằng diện tích của hai hình tròn bán kính $R=2$: $2 \cdot \pi \cdot 2^2 = 8\pi$. Diện tích phần trống không tô màu là: $(4+x)^2 - 8\pi$.<br>
-                    b) Áp dụng định lý Pythagore vào tam giác vuông tạo bởi tâm các nửa đường tròn, tính ra trị số cấu trúc $x = -2 + 2\sqrt{3}$. Suy ra độ dài một cạnh hình vuông là $2 + 2\sqrt{3}$. Vậy diện tích hình vuông $ABCD$ cần tìm bằng: $S = (2 + 2\sqrt{3})^2 = 16 + 8\sqrt{3}$.
+                    a) Nhìn vào hình vẽ, cạnh của hình vuông có độ dài bằng hai lần bán kính cộng thêm một đoạn dài $x$, tức là: $2 \cdot 2 + x = 4 + x$.<br>
+                    Diện tích hình vuông $ABCD$ là: $S_{HV} = (4 + x)^2$.<br>
+                    Diện tích 4 nửa hình tròn bán kính $R=2$ chính là diện tích của 2 hình tròn trọn vẹn: $S_{\text{tròn}} = 2 \cdot (\pi \cdot R^2) = 2 \cdot \pi \cdot 2^2 = 8\pi$.<br>
+                    Biểu thức tính diện tích phần không tô màu là: $S_{KTM} = (4 + x)^2 - 8\pi$.<br>
+                    b) Xét tam giác vuông tạo bởi tâm của hai nửa hình tròn liền kề, khoảng cách giữa 2 tâm bằng $2 + 2 = 4$. Khoảng cách từ tâm đến cạnh hình vuông bằng bán kính $2$. Dựa vào tính chất đối xứng hình học, ta tính được đường chéo nhỏ liên kết và giải ra $x = -2 + 2\sqrt{3}$.<br>
+                    Cạnh hình vuông bằng: $4 + x = 4 + (-2 + 2\sqrt{3}) = 2 + 2\sqrt{3}$.<br>
+                    Diện tích hình vuông $ABCD$ là: $S = (2 + 2\sqrt{3})^2 = 4 + 8\sqrt{3} + 12 = 16 + 8\sqrt{3}$ (đơn vị diện tích).
                 </div>
             </div>
         </div>
 
-        <div class="exercise-box">
+        <div class="exercise-box" id="box-24-5">
             <div class="exercise-title">Bài 5 (1,0 điểm)</div>
-            <p>Một lon nước ngọt có dạng hình trụ chứa bên trong $355\text{ ml}$ dung dịch. Biết đường kính đáy trong lòng lon là $6,5\text{ cm}$. Nhà máy thường đóng gói 24 lon xếp khít vừa vặn vào một thùng carton phẳng.</p>
+            <p>Một lon nước ngọt có dạng hình trụ chứa bên trong $355\text{ ml}$ dung dịch. Biết đường kính đáy trong lòng lon là $6,5\text{ cm}$. Nhà máy thường đóng gói 24 lon xếp khít vừa vặn vào một thùng carton phẳng (mạng lưới $6 \times 4$ lon).</p>
             <p>a) Tính chiều cao định hình vỏ lon (biết lượng nước ngọt bên trong chiếm đúng 90% thể tích toàn lon) và tổng thể tích khối của thùng carton 24 lon đó.</p>
             <p>b) Một quán ăn sử dụng loại ly khối trụ có dung tích $310\text{ ml}$. Khi rót nước ngọt vào ly kèm đá, lượng nước ngọt chỉ chiếm 60% dung tích ly. Hỏi nếu mua 2 thùng nước ngọt trên thì chủ quán có thể rót đầy đủ bao nhiêu ly phục vụ khách?</p>
             
@@ -492,136 +475,135 @@
                 <img src="De24.Bai5.jpg" alt="Thùng nước ngọt 24 lon" class="exercise-img">
             </div>
 
-            <div class="student-action" id="action-24-5">
+            <div class="student-action">
                 <div class="part-submission">
-                    <div class="part-title">↳ Câu a) Chiều cao lon (cm) & Thể tích thùng carton (cm³):</div>
-                    <div class="submission-methods">
-                        <div class="input-group">
-                            <label>Nhập kết quả tính toán:</label>
-                            <input type="text" class="answer-input" id="text-24-5-a" placeholder="Ví dụ: ~12cm và 12168cm³">
-                        </div>
+                    <div class="part-title">↳ Câu a) Tính chiều cao lon (cm) & Thể tích thùng carton (cm³):</div>
+                    <div class="input-group">
+                        <label>Nhập kết quả:</label>
+                        <input type="text" class="answer-input" id="text-24-5-a" placeholder="Chiều cao và thể tích thùng...">
                     </div>
                 </div>
 
                 <div class="part-submission">
-                    <div class="part-title">↳ Câu b) Số ly nước ngọt tối đa rót được:</div>
-                    <div class="submission-methods">
-                        <div class="input-group">
-                            <label>Nhập số ly (làm tròn xuống):</label>
-                            <input type="text" class="answer-input" id="text-24-5-b" placeholder="Ví dụ: 91 ly">
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin: 5px 0 12px 12px;" class="upload-group">
-                    <label>Hoặc nộp hình chụp các bước tính toán thể tích khối trụ:</label>
-                    <label class="file-label" for="file-24-5-all">📸 Chụp ảnh bài làm</label>
-                    <input type="file" id="file-24-5-all" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-5-all')">
-                    <div class="preview-container" id="prev-24-5-all">
-                        <img src="" class="preview-img" alt="Xem trước bài làm">
+                    <div class="part-title">↳ Câu b) Tính số ly nước ngọt phục vụ khách:</div>
+                    <div class="input-group">
+                        <label>Nhập số lượng ly:</label>
+                        <input type="text" class="answer-input" id="text-24-5-b" placeholder="Số lượng ly tròn số...">
                     </div>
                 </div>
 
                 <div class="btn-group">
-                    <button class="btn btn-submit" onclick="submitAndShow('24-5', ['24-5-a', '24-5-b', '24-5-all'])">📤 Nộp bài làm & Xem đáp án</button>
-                    <a href="https://www.youtube.com/watch?v=Ezod4u9Bygo" target="_blank" class="btn-vid">🎬 Video Nồng độ dung dịch (C%)</a>
+                    <button class="btn btn-submit" onclick="submitAndShow('24-5')">📤 Nộp bài & Xem đáp án</button>
+                    <a href="https://www.youtube.com/watch?v=Ezod4u9Bygo" target="_blank" class="btn-vid">🎬 Video Thể tích khối trụ tròn</a>
                 </div>
                 
                 <div id="sol-24-5" class="solution-box">
                     <div class="solution-header">✓ ĐÁP ÁN CHÍNH THỨC</div>
                     <strong>Hướng dẫn giải:</strong><br>
-                    a) Thể tích toàn bộ một lon nước ngọt là: $355 : 90\% = \frac{3550}{9}\text{ cm}^3$. Chiều cao lon trụ tròn tính theo công thức: $h = \frac{V}{\pi \cdot R^2} \approx 12\text{ cm}$ (với $R = 3,25\text{ cm}$). Thùng carton xếp khít dạng mạng lưới lưới $6 \times 4$ lon nên kích thước thùng là: Dài $6 \cdot 6,5 = 39\text{ cm}$, Rộng $4 \cdot 6,5 = 26\text{ cm}$, Cao $12\text{ cm}$. Thể tích thùng carton là: $V = 39 \cdot 26 \cdot 12 = 12168\text{ cm}^3$.<br>
-                    b) Thể tích phần nước ngọt thực tế trong một ly: $310 \cdot 60\% = 186\text{ ml}$. Tổng thể tích nước từ 2 thùng (gồm 48 lon) mua về là: $355 \cdot 48 = 17040\text{ ml}\text{ (hoặc cm}^3\text{)}$. Số lượng ly đầy đủ rót được là: $17040 : 186 \approx 91,61 \rightarrow$ Làm tròn xuống được đúng 91 ly.
+                    a) Bán kính đáy lon nước ngọt là: $R = 6,5 : 2 = 3,25\text{ cm}$.<br>
+                    Thể tích thực của toàn lon nước là: $V_{\text{lon}} = 355 : 90\% = \frac{3550}{9}\text{ cm}^3 \approx 394,44\text{ cm}^3$.<br>
+                    Chiều cao vỏ lon là: $h = \frac{V_{\text{lon}}}{\pi \cdot R^2} = \frac{3550/9}{3,14 \cdot 3,25^2} \approx 12\text{ cm}$.<br>
+                    Kích thước thùng carton đựng 24 lon ($6 \times 4$ lon):<br>
+                    - Chiều dài: $6 \cdot 6,5 = 39\text{ cm}$.<br>
+                    - Chiều rộng: $4 \cdot 6,5 = 26\text{ cm}$.<br>
+                    - Chiều cao: $12\text{ cm}$.<br>
+                    Thể tích thùng carton là: $V_{\text{thùng}} = 39 \cdot 26 \cdot 12 = 12168\text{ cm}^3$.<br>
+                    b) Thể tích nước ngọt thực tế cần cho một ly nước đá là: $310 \cdot 60\% = 186\text{ ml}$.<br>
+                    Tổng số lon nước ngọt trong 2 thùng là: $24 \cdot 2 = 48$ (lon).<br>
+                    Tổng thể tích nước ngọt của 48 lon là: $48 \cdot 355 = 17040\text{ ml}$.<br>
+                    Số ly nước ngọt phục vụ khách tối đa là: $17040 : 186 \approx 91,61 \rightarrow$ Làm tròn xuống được đúng 91 ly.
                 </div>
             </div>
         </div>
 
-        <div class="exercise-box">
+        <div class="exercise-box" id="box-24-6">
             <div class="exercise-title">Bài 6 (1,0 điểm)</div>
             <p>Huy đi tham quan di chuyển từ Huế vào Đà Nẵng bằng xe máy qua đường đèo Hải Vân dài $20\text{ km}$. Lúc về, Huy di chuyển theo hướng ngược lại qua hầm đường bộ Hải Vân dài $6,3\text{ km}$. Biết vận tốc trung bình di chuyển trong hầm nhanh hơn vận tốc leo đèo là $12\text{ km/h}$, và tổng thời gian di chuyển cả đi lẫn về hết đúng $49$ phút. Tính vận tốc của xe trên mỗi chặng đường.</p>
             
-            <div class="student-action" id="action-24-6">
-                <div class="submission-methods">
+            <div class="student-action">
+                <div class="part-submission">
+                    <div class="part-title">↳ Chặng đường Đèo & chặng đường Hầm:</div>
                     <div class="input-group">
-                        <label>Cách 1: Nhập đáp số chặng Đèo & chặng Hầm:</label>
-                        <input type="text" class="answer-input" id="text-24-6" placeholder="Ví dụ: 30 km/h và 42 km/h">
-                    </div>
-                    <div class="upload-group">
-                        <label>Cách 2: Tải lên hình chụp phương trình lập được:</label>
-                        <label class="file-label" for="file-24-6">📸 Chụp hình / Chọn ảnh</label>
-                        <input type="file" id="file-24-6" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-6')">
-                        <div class="preview-container" id="prev-24-6">
-                            <img src="" class="preview-img" alt="Xem trước bài làm">
-                        </div>
+                        <label>Nhập vận tốc (km/h):</label>
+                        <input type="text" class="answer-input" id="text-24-6" placeholder="Vận tốc đèo và vận tốc hầm...">
                     </div>
                 </div>
                 <div class="btn-group">
-                    <button class="btn btn-submit" onclick="submitAndShow('24-6', ['text-24-6', 'file-24-6'])">📤 Nộp câu trả lời & Xem đáp án</button>
+                    <button class="btn btn-submit" onclick="submitAndShow('24-6')">📤 Nộp bài & Xem đáp án</button>
                 </div>
                 
                 <div id="sol-24-6" class="solution-box">
                     <div class="solution-header">✓ ĐÁP ÁN CHÍNH THỨC</div>
-                    <strong>Hướng dẫn giải:</strong> Đổi thời gian $49\text{ phút} = \frac{49}{60}\text{ giờ}$. Gọi vận tốc di chuyển trên đường đèo là $x\text (km/h, } x > 0)$. Vận tốc chặng đi trong hầm hỏa tốc tương ứng là $x + 12\text{ (km/h)}$. Lập phương trình tổng thời gian:
-                    $$\frac{20}{x} + \frac{6,3}{x+12} = \frac{49}{60}$$
-                    Quy đồng mẫu số biến đổi đưa về dạng phương trình bậc hai: $49x^2 - 990x - 14400 = 0$. Giải phương trình tìm được nghiệm dương thỏa mãn điều kiện là $x = 30\text{ km/h}$. Vận tốc chặng đi qua hầm là $30 + 12 = 42\text{ km/h}$.
+                    <strong>Hướng dẫn giải:</strong><br>
+                    Đổi $49\text{ phút} = \frac{49}{60}\text{ giờ}$.<br>
+                    Gọi vận tốc trung bình của xe máy đi trên đường đèo là $x\text{ (km/h), } x > 0$.<br>
+                    Vận tốc chặng đi qua hầm đường bộ là: $x + 12\text{ (km/h)}$.<br>
+                    Thời gian đi qua đèo Hải Vân là: $\frac{20}{x}$ (giờ). Thời gian đi qua hầm là: $\frac{6,3}{x + 12}$ (giờ).<br>
+                    Ta có phương trình tổng thời gian: $$\frac{20}{x} + \frac{6,3}{x + 12} = \frac{49}{60}$$
+                    $$\Leftrightarrow 20 \cdot 60 \cdot (x + 12) + 6,3 \cdot 60 \cdot x = 49 \cdot x \cdot (x + 12)$$
+                    $$\Leftrightarrow 1200x + 14400 + 378x = 49x^2 + 588x \Leftrightarrow 49x^2 - 990x - 14400 = 0$$
+                    Giải phương trình bậc hai ta được: $x = 30$ (thỏa mãn) hoặc $x = -\frac{480}{49}$ (loại).<br>
+                    Vậy vận tốc đi trên đèo là $30\text{ km/h}$, vận tốc đi qua hầm là $30 + 12 = 42\text{ km/h}$.
                 </div>
             </div>
         </div>
 
-        <div class="exercise-box">
+        <div class="exercise-box" id="box-24-7">
             <div class="exercise-title">Bài 7 (3,0 điểm)</div>
             <p>Cho đường tròn $(O)$ đường kính $AB$. Kẻ hai tiếp tuyến vuông góc $Ax, By$ với nửa đường tròn. Từ một điểm $C$ bất kỳ thuộc cung nhỏ vẽ tiếp tuyến thứ ba cắt $Ax, By$ lần lượt tại $D$ và $E$.</p>
             <p>a) Chứng minh đẳng thức độ dài $DE = AD + BE$ và bốn điểm $C, A, O, D$ cùng nằm trên một đường tròn.</p>
             <p>b) Đoạn thẳng $OE$ cắt đường tròn $(O)$ tại hai điểm $V, K$ ($V$ nằm giữa $O$ và $E$), cắt chéo đoạn $BC$ tại $L$. Chứng minh hệ thức: $LO \cdot LE = LV \cdot LK$ và $CV$ là tia phân giác của góc $\widehat{LCE}$.</p>
             <p>c) Gọi $M$ là giao điểm của $CA$ và $DO$. Hãy tính diện tích hình phẳng tứ giác $DMLE$ theo bán kính $R$ trong trường hợp số liệu hình học cho biết $BE = R\sqrt{3}$.</p>
             
-            <div class="student-action" id="action-24-7">
+            <div class="student-action">
                 <div class="part-submission">
-                    <div class="part-title">↳ Phần câu hỏi a) và b) - Chứng minh hình học & Tứ giác nội tiếp:</div>
-                    <div class="submission-methods">
-                        <div class="upload-group">
-                            <label class="file-label" for="file-24-7-ab">📸 Chụp hình chứng minh câu a & b</label>
-                            <input type="file" id="file-24-7-ab" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-7-ab')">
-                            <div class="preview-container" id="prev-24-7-ab">
-                                <img src="" class="preview-img" alt="Xem trước bài làm">
-                            </div>
+                    <div class="part-title">↳ Phần câu a) Chứng minh hình học & Tứ giác đồng quy:</div>
+                    <div class="upload-group">
+                        <label class="file-label" for="file-24-7-a">📸 Tải ảnh chụp nháp câu a</label>
+                        <input type="file" id="file-24-7-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-7-a')">
+                        <div class="preview-container" id="prev-24-7-a">
+                            <img src="" class="preview-img" alt="Xem trước bài làm">
                         </div>
                     </div>
                 </div>
 
                 <div class="part-submission">
-                    <div class="part-title">↳ Phần câu hỏi c) - Tính toán diện tích theo R:</div>
-                    <div class="submission-methods">
-                        <div class="input-group">
-                            <label>Nhập kết quả thu gọn diện tích:</label>
-                            <input type="text" class="answer-input" id="text-24-7-c" placeholder="Biểu thức chứa R²">
+                    <div class="part-title">↳ Phần câu b) Chứng minh hệ thức LO.LE = LV.LK:</div>
+                    <div class="upload-group">
+                        <label class="file-label" for="file-24-7-b">📸 Tải ảnh chụp bài làm câu b</label>
+                        <input type="file" id="file-24-7-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-7-b')">
+                        <div class="preview-container" id="prev-24-7-b">
+                            <img src="" class="preview-img" alt="Xem trước bài làm">
                         </div>
-                        <div class="upload-group">
-                            <label>Hoặc tải ảnh các bước tính toán hình phẳng:</label>
-                            <label class="file-label" for="file-24-7-c">📸 Chụp ảnh bài làm câu c</label>
-                            <input type="file" id="file-24-7-c" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-7-c')">
-                            <div class="preview-container" id="prev-24-7-c">
-                                <img src="" class="preview-img" alt="Xem trước bài làm">
-                            </div>
-                        </div>
+                    </div>
+                </div>
+
+                <div class="part-submission">
+                    <div class="part-title">↳ Phần câu c) Tính diện tích hình phẳng DMLE theo R:</div>
+                    <div class="input-group">
+                        <label>Nhập đáp số biểu thức rút gọn:</label>
+                        <input type="text" class="answer-input" id="text-24-7-c" placeholder="Biểu thức kết quả theo R...">
                     </div>
                 </div>
 
                 <div class="btn-group">
-                    <button class="btn btn-submit" onclick="submitAndShow('24-7', ['24-7-ab', '24-7-c', 'text-24-7-c'])">📤 Nộp bài giải hình học & Xem đáp án</button>
+                    <button class="btn btn-submit" onclick="submitAndShow('24-7')">📤 Nộp bài & Xem đáp án</button>
                     <a href="https://www.youtube.com/watch?v=fg38TFRJsJk" target="_blank" class="btn-vid">🎬 Video Tứ giác nội tiếp</a>
                 </div>
                 
                 <div id="sol-24-7" class="solution-box">
                     <div class="solution-header">✓ ĐÁP ÁN CHÍNH THỨC</div>
-                    <strong>Hình vẽ minh họa đáp án:</strong><br>
+                    <strong>Hình vẽ minh họa đáp án chi tiết (Sắc nét, không lo vỡ hình):</strong><br>
                     <div class="image-container">
                         <img src="De24.Bai7.Da.png" alt="Sơ đồ chứng minh hình học Bài 7 Đề 24" class="sol-img">
                     </div>
-                    <strong>Tóm tắt chuỗi chứng minh:</strong><br>
-                    a) Theo tính chất tiếp tuyến cắt nhau tại một điểm: $AD = DC$ và $BE = EC$, suy ra đoạn nối $DE = DC + CE = AD + BE$. Do tiếp tuyến vuông góc $\widehat{DAO} = \widehat{DCO} = 90^\circ$ nên hai điểm $A, C$ cùng nhìn đoạn $DO$ dưới một góc vuông, suy ra tứ giác $CAOD$ nội tiếp đường tròn đường kính $DO$.<br>
-                    b) Chứng minh tam giác vuông đồng dạng $\Delta CLO \sim \Delta ELC \rightarrow CL^2 = LO \cdot LE$. Mặt khác, tích cát tuyến đường tròn chỉ ra hệ thức lượng cơ bản $CL^2 = LV \cdot LK$, suy ra điều phải chứng minh. Hệ thức góc chứng minh dựa trên góc nội tiếp chắn cung.<br>
-                    c) Khi $BE = R\sqrt{3}$, áp dụng hệ thức lượng tìm các cạnh liên quan trong hệ trục tọa độ hình học, tính tổng diện tích tam giác lớn rồi trừ đi phần diện tích không bị giới hạn để suy ra biểu thức thu gọn cuối cùng theo tham số biến $R$.
+                    <strong>Lời giải chi tiết:</strong><br>
+                    a) Theo tính chất hai tiếp tuyến cắt nhau ta có: $AD = DC$ và $BE = EC$.<br>
+                    Do đó: $DE = DC + CE = AD + BE$ (đpcm).<br>
+                    Vì $DA$ và $DC$ là hai tiếp tuyến của đường tròn $(O)$ tại $A$ và $C$ nên $\widehat{DAO} = 90^\circ$ và $\widehat{DCO} = 90^\circ$. Xét tứ giác $DAOC$ có $\widehat{DAO} + \widehat{DCO} = 180^\circ$ nên bốn điểm $C, A, O, D$ thuộc cùng một đường tròn đường kính $DO$.<br>
+                    b) Qua các cặp tam giác đồng dạng lý thuyết $\Delta CLO \sim \Delta ELC$, ta chứng minh được hệ thức lượng $CL^2 = LO \cdot LE$. Mặt khác, theo hệ thức cát tuyến đường tròn chỉ ra $CL^2 = LV \cdot LK$, suy ra $LO \cdot LE = LV \cdot LK$.<br>
+                    c) Khi $BE = R\sqrt{3}$, xét tam giác vuông $\Delta BOE$ tại $B$ ta có: $\tan\widehat{EOB} = \frac{BE}{OB} = \frac{R\sqrt{3}}{R} = \sqrt{3} \Rightarrow \widehat{EOB} = 60^\circ$.<br>
+                    Từ đó suy ra độ dài đoạn thẳng $OE = 2R$. Tính toán diện tích các phần tam giác vuông cấu thành và thực hiện phép trừ diện tích hình phẳng: $S_{DMLE} = S_{\Delta ODE} - S_{\Delta OML} = \frac{7\sqrt{3}}{24}R^2$.
                 </div>
             </div>
         </div>
@@ -629,61 +611,406 @@
 
 
     <div id="exam30" class="exam-panel">
-        <div class="exercise-box">
+        <div class="exercise-box" id="box-30-1">
             <div class="exercise-title">Bài 1 (1,5 điểm)</div>
             <p>Cho parabol $(P): y = \frac{1}{3}x^2$.</p>
             <p>a) Vẽ đồ thị hàm số $(P)$.</p>
             <p>b) Tìm tọa độ giao điểm của $(P)$ và đường thẳng $(d): y = -x + 6$ bằng phép toán.</p>
             
-            <div class="student-action" id="action-30-1">
+            <div class="student-action">
                 <div class="part-submission">
-                    <div class="part-title">↳ Câu a) Bản vẽ đồ thị hàm số (P):</div>
-                    <div class="submission-methods">
-                        <div class="upload-group">
-                            <label class="file-label" for="file-30-1-a">📸 Chụp ảnh Parabol trong tập</label>
-                            <input type="file" id="file-30-1-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-1-a')">
-                            <div class="preview-container" id="prev-30-1-a">
-                                <img src="" class="preview-img" alt="Xem trước bài làm">
-                            </div>
+                    <div class="part-title">↳ Câu a) Vẽ parabol (P):</div>
+                    <div class="upload-group">
+                        <label class="file-label" for="file-30-1-a">📸 Đính kèm ảnh chụp đồ thị bài làm</label>
+                        <input type="file" id="file-30-1-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-1-a')">
+                        <div class="preview-container" id="prev-30-1-a">
+                            <img src="" class="preview-img" alt="Xem trước bài làm">
                         </div>
                     </div>
                 </div>
 
                 <div class="part-submission">
-                    <div class="part-title">↳ Câu b) Giải phương trình hoành độ giao điểm:</div>
-                    <div class="submission-methods">
-                        <div class="input-group">
-                            <label>Cách 1: Điền cặp tọa độ giao điểm:</label>
-                            <input type="text" class="answer-input" id="text-30-1-b" placeholder="Ví dụ: (3;3), (-6;12)">
-                        </div>
-                        <div class="upload-group">
-                            <label>Cách 2: Tải lên hình chụp lời giải:</label>
-                            <label class="file-label" for="file-30-1-b">📸 Chụp hình / Chọn ảnh</label>
-                            <input type="file" id="file-30-1-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-1-b')">
-                            <div class="preview-container" id="prev-30-1-b">
-                                <img src="" class="preview-img" alt="Xem trước bài làm">
-                            </div>
-                        </div>
+                    <div class="part-title">↳ Câu b) Giao điểm của (P) và (d):</div>
+                    <div class="input-group">
+                        <label>Nhập cặp tọa độ giao điểm:</label>
+                        <input type="text" class="answer-input" id="text-30-1-b" placeholder="Tọa độ các giao điểm...">
                     </div>
                 </div>
 
                 <div class="btn-group">
-                    <button class="btn btn-submit" onclick="submitAndShow('30-1', ['30-1-a', '30-1-b', 'text-30-1-b'])">📤 Nộp bài làm & Xem đáp án</button>
-                    <a href="https://www.youtube.com/watch?v=aFfLMdp_1QE&list=PL3yjsAgvkjdTkfpe6h5PbWpIAec4rq0yD" target="_blank" class="btn-vid">🎬 Video PT Hoành độ giao điểm</a>
+                    <button class="btn btn-submit" onclick="submitAndShow('30-1')">📤 Nộp bài & Xem đáp án</button>
+                    <a href="https://www.youtube.com/watch?v=aFfLMdp_1QE&list=PL3yjsAgvkjdTkfpe6h5PbWpIAec4rq0yD" target="_blank" class="btn-vid">🎬 Video Hoành độ giao điểm</a>
                 </div>
                 
                 <div id="sol-30-1" class="solution-box">
                     <div class="solution-header">✓ ĐÁP ÁN CHÍNH THỨC</div>
                     <strong>Hướng dẫn giải câu a và b):</strong><br>
-                    a) Đồ thị hàm số $(P)$ và đường thẳng $(d)$ trên cùng mặt phẳng tọa độ $Oxy$:<br>
+                    a) Bảng giá trị mẫu cho hàm số $(P): y = \frac{1}{3}x^2$:
+                    <table border="1" cellpadding="5" style="border-collapse:collapse; text-align:center; margin: 10px 0;">
+                        <tr><td>$x$</td><td>-6</td><td>-3</td><td>0</td><td>3</td><td>6</td></tr>
+                        <tr><td>$y = \frac{1}{3}x^2$</td><td>12</td><td>3</td><td>0</td><td>3</td><td>12</td></tr>
+                    </table>
+                    Hình vẽ hiển thị đồ thị hàm số chuẩn nét:<br>
                     <div class="image-container">
                         <img src="De30.Bai1.Da.png" alt="Đồ thị đồ thị P và d Đề 30" class="sol-img">
                     </div>
-                    b) Lập phương trình hoành độ giao điểm của đồ thị $(P)$ và đường thẳng $(d)$:
-                    $$\frac{1}{3}x^2 = -x + 6 \Leftrightarrow \frac{1}{3}x^2 + x - 6 = 0$$
-                    Giải phương trình bậc hai thu được hai nghiệm: $x = 3$ hoặc $x = -6$.
-                    - Với $x = 3 \Rightarrow y = \frac{1}{3} \cdot 3^2 = 3 \rightarrow$ Tọa độ giao điểm thứ nhất là $(3; 3)$.<br>
-                    - Với $x = -6 \Rightarrow y = \frac{1}{3} \cdot (-6)^2 = 12 \rightarrow$ Tọa độ giao điểm thứ hai là $(-6; 12)$.
+                    b) Phương trình hoành độ giao điểm của $(P)$ và $(d)$ là:
+                    $$\frac{1}{3}x^2 = -x + 6 \Leftrightarrow \frac{1}{3}x^2 + x - 6 = 0 \Leftrightarrow x^2 + 3x - 18 = 0$$
+                    Giải phương trình thu được: $x = 3 \Rightarrow y = 3$ hoặc $x = -6 \Rightarrow y = 12$.<br>
+                    Vậy hai giao điểm cần tìm là $(3; 3)$ và $(-6; 12)$.
                 </div>
             </div>
         </div>
+
+        <div class="exercise-box" id="box-30-2">
+            <div class="exercise-title">Bài 2 (1,0 điểm)</div>
+            <p>Cho phương trình bậc hai sau: $3x^2 - 12x + 2 = 0$.</p>
+            <p>a) Chứng minh phương trình trên luôn có hai nghiệm phân biệt.</p>
+            <p>b) Gọi $x_1, x_2$ là hai nghiệm thực. Không giải phương trình trực tiếp, hãy tính toán giá trị biểu thức: $$A = x_1(x_1^2 + x_2) + x_2(x_2^2 - x_1)$$</p>
+            
+            <div class="student-action">
+                <div class="part-submission">
+                    <div class="part-title">↳ Câu a) Chứng minh phương trình có hai nghiệm phân biệt:</div>
+                    <div class="upload-group">
+                        <label class="file-label" for="file-30-2-a">📸 Tải ảnh chứng minh Delta > 0</label>
+                        <input type="file" id="file-30-2-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-2-a')">
+                        <div class="preview-container" id="prev-30-2-a">
+                            <img src="" class="preview-img" alt="Xem trước bài làm">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="part-submission">
+                    <div class="part-title">↳ Câu b) Tính giá trị định lý Vi-ét biểu thức A:</div>
+                    <div class="input-group">
+                        <label>Kết quả số A =</label>
+                        <input type="text" class="answer-input" id="text-30-2-b" placeholder="Giá trị số tính toán...">
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-submit" onclick="submitAndShow('30-2')">📤 Nộp bài & Xem đáp án</button>
+                    <a href="https://www.youtube.com/watch?v=LApq7sBxfvM" target="_blank" class="btn-vid">🎬 Video Vi-ét nâng cao</a>
+                </div>
+                
+                <div id="sol-30-2" class="solution-box">
+                    <div class="solution-header">✓ ĐÁP ÁN CHÍNH THỨC</div>
+                    <strong>Hướng dẫn giải:</strong><br>
+                    a) Tính biệt thức thu gọn: $\Delta' = (-6)^2 - 3 \cdot 2 = 36 - 6 = 30$. Vì $\Delta' = 30 > 0$ nên phương trình luôn có 2 nghiệm phân biệt.<br>
+                    b) Theo định lý Vi-ét: $S = x_1 + x_2 = 4$ và $P = x_1 x_2 = \frac{2}{3}$. Khai triển biểu thức $A$:
+                    $$A = x_1^3 + x_1 x_2 + x_2^3 - x_1 x_2 = x_1^3 + x_2^3 = (x_1 + x_2)^3 - 3x_1 x_2(x_1 + x_2)$$
+                    Thay giá trị $S, P$ vào: $A = 4^3 - 3 \cdot \frac{2}{3} \cdot 4 = 64 - 8 = 56$.
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box" id="box-30-3">
+            <div class="exercise-title">Bài 3 (1,5 điểm)</div>
+            <p>Biểu đồ cột dưới đây biểu diễn kết quả phân loại học lực Học kỳ 1 của học sinh lớp 9A.</p>
+            
+            <div class="image-container">
+                <img src="De30.Bai3.png" alt="Biểu đồ kết quả học tập lớp 9A" class="exercise-img">
+            </div>
+
+            <p>a) Lớp 9A có tổng cộng bao nhiêu học sinh?</p>
+            <p>b) Chọn ngẫu nhiên một học sinh bất kỳ trong lớp. Tính xác suất của hai biến cố sau:<br>
+            - Biến cố $A$: "Học sinh được lựa chọn đạt học lực loại Giỏi".<br>
+            - Biến cố $B$: "Học sinh được lựa chọn đạt mức học lực từ Khá trở lên".</p>
+            
+            <div class="student-action">
+                <div class="part-submission">
+                    <div class="part-title">↳ Câu a) Tính sĩ số học sinh lớp 9A:</div>
+                    <div class="input-group">
+                        <label>Nhập kết quả số học sinh:</label>
+                        <input type="text" class="answer-input" id="text-30-3-a" placeholder="Tổng số học sinh lớp...">
+                    </div>
+                </div>
+
+                <div class="part-submission">
+                    <div class="part-title">↳ Câu b) Tính giá trị xác suất P(A) và P(B):</div>
+                    <div class="input-group">
+                        <label>Nhập kết quả:</label>
+                        <input type="text" class="answer-input" id="text-30-3-b" placeholder="Giá trị xác suất tương ứng...">
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-submit" onclick="submitAndShow('30-3')">📤 Nộp bài & Xem đáp án</button>
+                    <a href="https://www.youtube.com/watch?v=yNox9lzM6Iw" target="_blank" class="btn-vid">🎬 Video Thống kê & Xác suất</a>
+                </div>
+                
+                <div id="sol-30-3" class="solution-box">
+                    <div class="solution-header">✓ ĐÁP ÁN CHÍNH THỨC</div>
+                    <strong>Hướng dẫn giải:</strong><br>
+                    a) Số học sinh lớp 9A là: $10 + 25 + 7 + 3 = 45$ (học sinh).<br>
+                    b) Tính xác suất:<br>
+                    - Xác suất của biến cố $A$ là: $P(A) = \frac{10}{45} = \frac{2}{9}$.<br>
+                    - Số học sinh từ Khá trở lên (gồm Giỏi và Khá) là: $10 + 25 = 35$ học sinh.<br>
+                    Xác suất của biến cố $B$ là: $P(B) = \frac{35}{45} = \frac{7}{9}$.
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box" id="box-30-4">
+            <div class="exercise-title">Bài 4 (1,0 điểm)</div>
+            <p>Mặt trước một căn biệt thự là một khu vườn diện tích hình vuông có cạnh bằng $a\text{ (m)}$. Người thiết kế đặt một đài phun nước hình tròn ở chính giữa lõi, có đường kính nhỏ hơn độ dài cạnh khu vườn là $4\text{ m}$. Phần đất trống còn lại xung quanh dùng lát gạch sân vườn.</p>
+            
+            <div class="image-container">
+                <img src="De30.Bai4.png" alt="Sơ đồ khu vườn hình vuông" class="exercise-img">
+            </div>
+
+            <p>a) Viết biểu thức đại số biểu diễn diện tích đất làm đài phun nước theo độ dài cạnh $a$.</p>
+            <p>b) Biết diện tích đo đạc thực tế của vùng làm đài phun nước là $28,26\text{ m}^2$, hãy tính độ dài cạnh $a$ của mảnh vườn biệt thự (Lấy giá trị hằng số $\pi = 3,14$).</p>
+            
+            <div class="student-action">
+                <div class="part-submission">
+                    <div class="part-title">↳ Câu a) Thiết lập biểu thức diện tích đài phun nước:</div>
+                    <div class="input-group">
+                        <label>Biểu thức đại số:</label>
+                        <input type="text" class="answer-input" id="text-30-4-a" placeholder="Biểu thức phụ thuộc vào biến a...">
+                    </div>
+                </div>
+
+                <div class="part-submission">
+                    <div class="part-title">↳ Câu b) Tìm độ dài cạnh mảnh vườn a (m):</div>
+                    <div class="input-group">
+                        <label>Nhập độ dài kết quả:</label>
+                        <input type="text" class="answer-input" id="text-30-4-b" placeholder="Chiều dài cạnh vườn...">
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-submit" onclick="submitAndShow('30-4')">📤 Nộp bài & Xem đáp án</button>
+                </div>
+                
+                <div id="sol-30-4" class="solution-box">
+                    <div class="solution-header">✓ ĐÁP ÁN CHÍNH THỨC</div>
+                    <strong>Hướng dẫn giải:</strong><br>
+                    a) Đường kính hình tròn của đài phun nước là $a - 4\text{ (m)}$ (điều kiện $a > 4$). Bán kính là $R = \frac{a - 4}{2}\text{ (m)}$.<br>
+                    Biểu thức diện tích đài phun nước theo $a$: $S = \pi \cdot R^2 = \pi \cdot \left(\frac{a - 4}{2}\right)^2$ (đơn vị diện tích).<br>
+                    b) Thay diện tích thực tế $28,26\text{ m}^2$ và $\pi = 3,14$ vào:<br>
+                    $3,14 \cdot \left(\frac{a - 4}{2}\right)^2 = 28,26 \Rightarrow \left(\frac{a - 4}{2}\right)^2 = 9 \Rightarrow \frac{a - 4}{2} = 3$ (vì $a > 4$).<br>
+                    $\Rightarrow a - 4 = 6 \Rightarrow a = 10\text{ (m)}$.
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box" id="box-30-5">
+            <div class="exercise-title">Bài 5 (1,0 điểm)</div>
+            <p>Công trình xây dựng sử dụng hệ thống gồm 10 cây cột nhà hình trụ tròn bằng bê tông có chiều cao bằng nhau là $4,5\text{ m}$. Kiến trúc gồm 4 cây cột đặt ngoài sảnh có đường kính đáy là $40\text{ cm}$ và 6 cây cột chịu lực trong nhà có đường kính đáy là $26\text{ cm}$.</p>
+            
+            <div class="image-container">
+                <img src="De30.Bai5.jpg" alt="Hình minh họa hàng cột trụ" class="exercise-img">
+            </div>
+
+            <p>a) Tính diện tích xung quanh vỏ ngoài của một cây cột trước sảnh và một cây cột trong nhà.</p>
+            <p>b) Đơn giá thi công phủ sơn trang trí giả đá là $450.000\text{ đồng/m}^2$. Tính tổng chi phí chủ nhà cần thanh toán để hoàn thành sơn toàn bộ bề mặt xung quanh của cả 10 cây cột trụ đó (Kết quả làm tròn đến hàng nghìn).</p>
+            
+            <div class="student-action">
+                <div class="part-submission">
+                    <div class="part-title">↳ Câu a) Tính diện tích xung quanh 2 loại cột trụ (m²):</div>
+                    <div class="input-group">
+                        <label>Kết quả sảnh lớn và trong nhà:</label>
+                        <input type="text" class="answer-input" id="text-30-5-a" placeholder="Diện tích sảnh lớn và trong nhà...">
+                    </div>
+                </div>
+
+                <div class="part-submission">
+                    <div class="part-title">↳ Câu b) Tính tổng số tiền sơn giả đá (VNĐ):</div>
+                    <div class="input-group">
+                        <label>Nhập số tiền:</label>
+                        <input type="text" class="answer-input" id="text-30-5-b" placeholder="Tổng kinh phí dự toán...">
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-submit" onclick="submitAndShow('30-5')">📤 Nộp bài & Xem đáp án</button>
+                    <a href="https://www.youtube.com/watch?v=c1OTmwRc0oE" target="_blank" class="btn-vid">🎬 Video Diện tích xung quanh hình trụ</a>
+                </div>
+                
+                <div id="sol-30-5" class="solution-box">
+                    <div class="solution-header">✓ ĐÁP ÁN CHÍNH THỨC</div>
+                    <strong>Hướng dẫn giải:</strong><br>
+                    a) Đổi đường kính sang mét: $40\text{ cm} = 0,4\text{ m} \Rightarrow R_1 = 0,2\text{ m}$; $26\text{ cm} = 0,26\text{ m} \Rightarrow R_2 = 0,13\text{ m}$.<br>
+                    - Diện tích xung quanh 1 cột sảnh lớn: $S_{xq1} = 2\pi R_1 h = 2 \cdot 3,1416 \cdot 0,2 \cdot 4,5 \approx 5,65\text{ m}^2$ (hoặc $1,8\pi$).<br>
+                    - Diện tích xung quanh 1 cột trong nhà: $S_{xq2} = 2\pi R_2 h = 2 \cdot 3,1416 \cdot 0,13 \cdot 4,5 \approx 3,68\text{ m}^2$ (hoặc $1,17\pi$).<br>
+                    b) Tổng diện tích xung quanh của cả 10 cây cột là:<br>
+                    $S_{\text{tổng}} = 4 \cdot (2\pi \cdot 0,2 \cdot 4,5) + 6 \cdot (2\pi \cdot 0,13 \cdot 4,5) = 7,2\pi + 7,02\pi = 14,22\pi \approx 44,674\text{ m}^2$.<br>
+                    Tổng chi phí sơn hoàn thiện là: $\text{Chi phí} = 44,674 \cdot 450.000 \approx 20.103.000\text{ đồng}$.
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box" id="box-30-6">
+            <div class="exercise-title">Bài 6 (1,0 điểm)</div>
+            <p>Anh Hùng và bác Sáu cùng tập thể dục di chuyển trên một con đường khép kín chạy quanh quảng trường công viên An Sương. Anh Hùng chạy bộ một vòng hết đúng 10 phút, bác Sáu đi bộ một vòng hết 30 phút. Hai người cùng xuất phát đồng thời tại cổng công viên. Hỏi nếu tính riêng trong khoảng thời gian anh Hùng chạy vừa đủ hoàn thành xong 3 vòng thì hai người sẽ gặp nhau bao nhiêu lần (Không tính lần gặp nhau lúc xuất phát ban đầu)? Xét hai trường hợp độc lập sau:</p>
+            <p>a) Trường hợp anh Hùng và bác Sáu di chuyển cùng chiều nhau.</p>
+            <p>b) Trường hợp anh Hùng và bác Sáu di chuyển ngược chiều nhau.</p>
+            
+            <div class="student-action">
+                <div class="part-submission">
+                    <div class="part-title">↳ Câu a) Số lần gặp nhau khi di chuyển cùng chiều:</div>
+                    <div class="input-group">
+                        <label>Nhập kết quả:</label>
+                        <input type="text" class="answer-input" id="text-30-6-a" placeholder="Số lần đuổi kịp...">
+                    </div>
+                </div>
+
+                <div class="part-submission">
+                    <div class="part-title">↳ Câu b) Số lần gặp nhau khi di chuyển ngược chiều:</div>
+                    <div class="input-group">
+                        <label>Nhập kết quả:</label>
+                        <input type="text" class="answer-input" id="text-30-6-b" placeholder="Số lần chạm mặt...">
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-submit" onclick="submitAndShow('30-6')">📤 Nộp bài & Xem đáp án</button>
+                </div>
+                
+                <div id="sol-30-6" class="solution-box">
+                    <div class="solution-header">✓ ĐÁP ÁN CHÍNH THỨC</div>
+                    <strong>Hướng dẫn giải:</strong><br>
+                    Thời gian anh Hùng chạy xong 3 vòng là: $3 \cdot 10 = 30$ phút.<br>
+                    Trong 30 phút này, bác Sáu đi bộ được vừa vặn: $30 : 30 = 1$ (vòng).<br>
+                    a) **Đi cùng chiều:** Số lần anh Hùng đuổi kịp và vượt qua bác Sáu là hiệu số vòng di chuyển: $3 - 1 = 2$ lần.<br>
+                    b) **Đi ngược chiều:** Số lần hai người đối mặt đâm chéo qua nhau tính theo công thức tổng số vòng di chuyển: $3 + 1 = 4$ lần.
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box" id="box-30-7">
+            <div class="exercise-title">Bài 7 (3,0 điểm)</div>
+            <p>Cho đường tròn tâm $(O)$ bán kính $R$. From điểm $A$ nằm ngoài đường tròn kẻ hai tiếp tuyến $AM, AN$ ($M, N$ là các tiếp điểm). Kẻ dây cung $BC$ đi qua điểm $H$ sao cho $BC \perp OM$. Đường thẳng $AC$ cắt đường tròn tại điểm thứ hai là $D$. Gọi $I$ là trung điểm của dây $CD$, và $F$ là giao điểm của hai đường thẳng $MN$ và $CD$.</p>
+            <p>a) Chứng minh tứ giác $AMOI$ nội tiếp đường tròn.</p>
+            <p>b) Chứng minh hệ thức hình học hình phẳng: $FI \cdot FA = FC \cdot FD$.</p>
+            <p>c) Trong trường hợp vị trí điểm $A$ cách tâm một khoảng sao cho độ dài tiếp tuyến $AM = 2R$, hãy tính diện tích phần mặt phẳng bị giới hạn bởi hai đoạn thẳng tiếp tuyến $AM, AN$ và cung nhỏ $MN$ theo bán kính $R$.</p>
+            
+            <div class="student-action">
+                <div class="part-submission">
+                    <div class="part-title">↳ Phần câu a) Chứng minh tứ giác AMOI nội tiếp:</div>
+                    <div class="upload-group">
+                        <label class="file-label" for="file-30-7-a">📸 Tải ảnh bài làm câu a</label>
+                        <input type="file" id="file-30-7-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-7-a')">
+                        <div class="preview-container" id="prev-30-7-a">
+                            <img src="" class="preview-img" alt="Xem trước bài làm">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="part-submission">
+                    <div class="part-title">↳ Phần câu b) Chứng minh hệ thức FI.FA = FC.FD:</div>
+                    <div class="upload-group">
+                        <label class="file-label" for="file-30-7-b">📸 Tải ảnh bài làm câu b</label>
+                        <input type="file" id="file-30-7-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-7-b')">
+                        <div class="preview-container" id="prev-30-7-b">
+                            <img src="" class="preview-img" alt="Xem trước bài làm">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="part-submission">
+                    <div class="part-title">↳ Phần câu c) Tính diện tích hình giới hạn theo R:</div>
+                    <div class="input-group">
+                        <label>Nhập kết quả biểu thức diện tích:</label>
+                        <input type="text" class="answer-input" id="text-30-7-c" placeholder="Giá trị diện tích theo R²...">
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-submit" onclick="submitAndShow('30-7')">📤 Nộp bài & Xem đáp án</button>
+                    <a href="https://www.youtube.com/watch?v=YbOUkoS2-Qw" target="_blank" class="btn-vid">🎬 Video Hệ thức lượng hình học</a>
+                </div>
+                
+                <div id="sol-30-7" class="solution-box">
+                    <div class="solution-header">✓ ĐÁP ÁN CHÍNH THỨC</div>
+                    <strong>Hình vẽ minh họa đáp án chính thức (Rõ nét, chuẩn kích thước):</strong><br>
+                    <div class="image-container">
+                        <img src="De30.Bai7.Da.png" alt="Sơ đồ hình học Bài 7 Đề 30" class="sol-img">
+                    </div>
+                    <strong>Tóm tắt chuỗi chứng minh và kết quả:</strong><br>
+                    a) Do $I$ là trung điểm dây cung $CD$ nên theo liên hệ đường kính và dây cung, ta có $OI \perp CD \Rightarrow \widehat{AIO} = 90^\circ$. Mặt khác $\widehat{AMO} = 90^\circ$ (do $AM$ là tiếp tuyến). Do đó $M$ và $I$ cùng nhìn $AO$ dưới góc vuông nên tứ giác $AMOI$ nội tiếp đường tròn đường kính $AO$.<br>
+                    b) Chứng minh các cặp tam giác đồng dạng ghép đối đỉnh: $\Delta FAM \sim \Delta FNI \Rightarrow FA \cdot FI = FM \cdot FN$ (1). Tiếp theo chứng minh $\Delta FMC \sim \Delta FDN \Rightarrow FM \cdot FN = FC \cdot FD$ (2). Từ (1) và (2) suy ra: $FI \cdot FA = FC \cdot FD$.<br>
+                    c) Diện tích hình phẳng được giới hạn bởi 2 tiếp tuyến và cung nhỏ $MN$ được tính bằng: $S = S_{AMON} - S_{q(MN)}$.<br>
+                    Khi $AM = 2R \Rightarrow S_{AMON} = 2 \cdot S_{\Delta AMO} = 2 \cdot \left(\frac{1}{2} \cdot AM \cdot MO\right) = 2R^2$. Tính toán số đo góc quạt tròn dựa vào lượng giác và thế vào công thức hình quạt để tìm ra trị số cuối cùng.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Hàm chuyển đổi Tab qua lại giữa các đề
+    function switchExam(examId, element) {
+        const panels = document.querySelectorAll('.exam-panel');
+        panels.forEach(panel => panel.classList.remove('active'));
+        
+        const tabs = document.querySelectorAll('.tab-btn');
+        tabs.forEach(tab => tab.classList.remove('active'));
+        
+        document.getElementById(examId).classList.add('active');
+        element.classList.add('active');
+    }
+
+    // Hàm hiển thị ảnh xem trước (Thumbnail) khi học sinh tải ảnh lên
+    function previewImage(input, previewId) {
+        const previewContainer = document.getElementById(previewId);
+        const previewImg = previewContainer.querySelector('.preview-img');
+        
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                previewContainer.style.display = 'block';
+            }
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            previewImg.src = '';
+            previewContainer.style.display = 'none';
+        }
+    }
+
+    // Logic kiểm tra rà soát động thông minh: Tự động quét các ô nhập liệu/hình ảnh nằm trong Bài đó
+    function submitAndShow(idKey) {
+        const targetBox = document.getElementById('box-' + idKey);
+        const solBox = document.getElementById('sol-' + idKey);
+        
+        if (!targetBox || !solBox) return;
+
+        // Quét tất cả các thẻ input text và input file thuộc phạm vi bài tập hiện tại
+        const textInputs = targetBox.querySelectorAll('input[type="text"]');
+        const fileInputs = targetBox.querySelectorAll('input[type="file"]');
+        
+        let hasData = false;
+
+        textInputs.forEach(input => {
+            if (input.value.trim() !== "") {
+                hasData = true;
+            }
+        });
+
+        fileInputs.forEach(input => {
+            if (input.files && input.files.length > 0) {
+                hasData = true;
+            }
+        });
+
+        if (!hasData) {
+            alert("Vui lòng nhập đáp án hoặc đính kèm hình ảnh bài làm trước khi xem đáp án chi tiết nhé!");
+            return;
+        }
+
+        alert("Hệ thống đã ghi nhận bài làm thành công! Dưới đây là đáp án chi tiết để đối chiếu.");
+        solBox.classList.add('visible');
+
+        // Ép MathJax biên dịch lại nội dung hiển thị trong hộp đáp án vừa mở ra
+        if (typeof MathJax !== 'undefined' && MathJax.typesetPromise) {
+            MathJax.typesetPromise([solBox]).catch(function (err) {
+                console.log("MathJax error: " + err.message);
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
