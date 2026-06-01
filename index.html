@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ôn Luyện Tuyển Sinh Lớp 10 - Môn Toán</title>
+    <title>Hệ Thống Ôn Luyện Tuyển Sinh Lớp 10 - Môn Toán</title>
     
     <script>
         window.MathJax = {
@@ -217,6 +217,7 @@
 
         .btn-submit { background-color: var(--success-color); color: white; }
         .btn-submit:hover { background-color: #27ae60; }
+        .btn-submit:disabled { background-color: #95a5a6; cursor: not-allowed; }
 
         .btn-vid {
             background-color: var(--danger-color);
@@ -250,14 +251,25 @@
             border-bottom: 1px dashed #ced4da;
             padding-bottom: 5px;
         }
+        
+        .alert-warning {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            display: none;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>ÔN LUYỆN VÀO LỚP 10 MÔN TOÁN</h1>
-        <p class="subtitle">Nộp bài độc lập từng câu hỏi nhỏ (a, b, c) & Đáp án trực quan chuẩn hóa hình ảnh</p>
+        <h1>HỆ THỐNG ÔN LUYỆN TOÁN VÀO LỚP 10</h1>
+        <p class="subtitle">Nộp bài từng phần (nhập đáp số hoặc đính kèm ảnh vẽ/giải) & Độ trễ hiển thị đáp án trực quan</p>
     </header>
 
     <div class="tabs">
@@ -276,7 +288,11 @@
                 <div class="part-submission">
                     <div class="part-title">↳ Câu a) Vẽ đồ thị hàm số (P):</div>
                     <div class="submission-methods">
-                        <div class="upload-group">
+                        <div class="input-group">
+                            <label>Nhập kết quả nhanh (nếu có):</label>
+                            <input type="text" class="answer-input" id="text-24-1-a" placeholder="Ví dụ: Đã vẽ xong">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
                             <label class="file-label" for="file-24-1-a">📸 Chụp hình bài vẽ đồ thị</label>
                             <input type="file" id="file-24-1-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-1-a')">
                             <div class="preview-container" id="prev-24-1-a">
@@ -291,7 +307,7 @@
                     <div class="submission-methods">
                         <div class="input-group">
                             <label>Nhập đáp số nhanh:</label>
-                            <input type="text" class="answer-input" id="text-24-1-b">
+                            <input type="text" class="answer-input" id="text-24-1-b" placeholder="Ví dụ: A(1/3; 1/9)">
                         </div>
                         <div class="upload-group" style="margin-top: 8px;">
                             <label class="file-label" for="file-24-1-b">📸 Chụp hình các bước giải</label>
@@ -302,6 +318,8 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="alert-warning" id="warn-24-1">Vui lòng hoàn thành đầy đủ thông tin hoặc tải ảnh lên cho TẤT CẢ các câu hỏi nhỏ ở trên trước khi nộp bài.</div>
 
                 <div class="btn-group">
                     <button class="btn btn-submit" onclick="submitAndShow('24-1')">📤 Nộp bài & Xem đáp án</button>
@@ -338,11 +356,17 @@
             <div class="student-action">
                 <div class="part-submission">
                     <div class="part-title">↳ Câu a) Chứng minh phương trình luôn có 2 nghiệm phân biệt:</div>
-                    <div class="upload-group">
-                        <label class="file-label" for="file-24-2-a">📸 Chụp ảnh bài chứng minh</label>
-                        <input type="file" id="file-24-2-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-2-a')">
-                        <div class="preview-container" id="prev-24-2-a">
-                            <img src="" class="preview-img" alt="Xem trước bài làm">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập nhanh kết quả chứng minh:</label>
+                            <input type="text" class="answer-input" id="text-24-2-a" placeholder="Ví dụ: a.c = -2 < 0 nên luôn có 2 nghiệm">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-24-2-a">📸 Chụp ảnh bài chứng minh</label>
+                            <input type="file" id="file-24-2-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-2-a')">
+                            <div class="preview-container" id="prev-24-2-a">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -352,7 +376,7 @@
                     <div class="submission-methods">
                         <div class="input-group">
                             <label>Nhập kết quả M =</label>
-                            <input type="text" class="answer-input" id="text-24-2-b">
+                            <input type="text" class="answer-input" id="text-24-2-b" placeholder="Ví dụ: M = 0">
                         </div>
                         <div class="upload-group" style="margin-top: 8px;">
                             <label class="file-label" for="file-24-2-b">📸 Chụp ảnh các bước biến đổi Vi-ét</label>
@@ -363,6 +387,8 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="alert-warning" id="warn-24-2">Vui lòng hoàn thành đầy đủ thông tin hoặc tải ảnh lên cho TẤT CẢ các câu hỏi nhỏ ở trên trước khi nộp bài.</div>
 
                 <div class="btn-group">
                     <button class="btn btn-submit" onclick="submitAndShow('24-2')">📤 Nộp bài & Xem đáp án</button>
@@ -388,19 +414,39 @@
             <div class="student-action">
                 <div class="part-submission">
                     <div class="part-title">↳ Câu a) Xác suất thực nghiệm lấy viên bi vàng:</div>
-                    <div class="input-group">
-                        <label>Nhập kết quả:</label>
-                        <input type="text" class="answer-input" id="text-24-3-a">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập kết quả nhanh:</label>
+                            <input type="text" class="answer-input" id="text-24-3-a" placeholder="Ví dụ: 11/16 hoặc 0.6875">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-24-3-a">📸 Đính kèm hình ảnh bài giải câu a</label>
+                            <input type="file" id="file-24-3-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-3-a')">
+                            <div class="preview-container" id="prev-24-3-a">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="part-submission">
                     <div class="part-title">↳ Câu b) Tính tổng số viên bi ban đầu trong hộp:</div>
-                    <div class="input-group">
-                        <label>Nhập số lượng tổng số bi:</label>
-                        <input type="text" class="answer-input" id="text-24-3-b">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập số lượng tổng số bi:</label>
+                            <input type="text" class="answer-input" id="text-24-3-b" placeholder="Ví dụ: 15 viên">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-24-3-b">📸 Đính kèm hình ảnh bài giải câu b</label>
+                            <input type="file" id="file-24-3-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-3-b')">
+                            <div class="preview-container" id="prev-24-3-b">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="alert-warning" id="warn-24-3">Vui lòng hoàn thành đầy đủ thông tin hoặc tải ảnh lên cho TẤT CẢ các câu hỏi nhỏ ở trên trước khi nộp bài.</div>
 
                 <div class="btn-group">
                     <button class="btn btn-submit" onclick="submitAndShow('24-3')">📤 Nộp bài & Xem đáp án</button>
@@ -431,19 +477,39 @@
             <div class="student-action">
                 <div class="part-submission">
                     <div class="part-title">↳ Câu a) Biểu thức diện tích phần không tô màu theo x:</div>
-                    <div class="input-group">
-                        <label>Nhập biểu thức:</label>
-                        <input type="text" class="answer-input" id="text-24-4-a">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập biểu thức:</label>
+                            <input type="text" class="answer-input" id="text-24-4-a" placeholder="Ví dụ: (4+x)^2 - 8pi">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-24-4-a">📸 Đính kèm hình ảnh bài giải câu a</label>
+                            <input type="file" id="file-24-4-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-4-a')">
+                            <div class="preview-container" id="prev-24-4-a">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="part-submission">
                     <div class="part-title">↳ Câu b) Tính diện tích hình vuông ABCD:</div>
-                    <div class="input-group">
-                        <label>Nhập giá trị số chính xác:</label>
-                        <input type="text" class="answer-input" id="text-24-4-b">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập giá trị số chính xác:</label>
+                            <input type="text" class="answer-input" id="text-24-4-b" placeholder="Ví dụ: 16 + 8sqrt(3)">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-24-4-b">📸 Đính kèm hình ảnh bài giải câu b</label>
+                            <input type="file" id="file-24-4-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-4-b')">
+                            <div class="preview-container" id="prev-24-4-b">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="alert-warning" id="warn-24-4">Vui lòng hoàn thành đầy đủ thông tin hoặc tải ảnh lên cho TẤT CẢ các câu hỏi nhỏ ở trên trước khi nộp bài.</div>
 
                 <div class="btn-group">
                     <button class="btn btn-submit" onclick="submitAndShow('24-4')">📤 Nộp bài & Xem đáp án</button>
@@ -476,19 +542,39 @@
             <div class="student-action">
                 <div class="part-submission">
                     <div class="part-title">↳ Câu a) Tính chiều cao lon (cm) & Thể tích thùng carton (cm³):</div>
-                    <div class="input-group">
-                        <label>Nhập kết quả:</label>
-                        <input type="text" class="answer-input" id="text-24-5-a">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập kết quả:</label>
+                            <input type="text" class="answer-input" id="text-24-5-a" placeholder="Ví dụ: h ≈ 12cm, V ≈ 12168 cm³">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-24-5-a">📸 Đính kèm hình ảnh bài giải câu a</label>
+                            <input type="file" id="file-24-5-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-5-a')">
+                            <div class="preview-container" id="prev-24-5-a">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="part-submission">
                     <div class="part-title">↳ Câu b) Tính số ly nước ngọt phục vụ khách:</div>
-                    <div class="input-group">
-                        <label>Nhập số lượng ly:</label>
-                        <input type="text" class="answer-input" id="text-24-5-b">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập số lượng ly:</label>
+                            <input type="text" class="answer-input" id="text-24-5-b" placeholder="Ví dụ: 91 ly">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-24-5-b">📸 Đính kèm hình ảnh bài giải câu b</label>
+                            <input type="file" id="file-24-5-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-5-b')">
+                            <div class="preview-container" id="prev-24-5-b">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="alert-warning" id="warn-24-5">Vui lòng hoàn thành đầy đủ thông tin hoặc tải ảnh lên cho TẤT CẢ các câu hỏi nhỏ ở trên trước khi nộp bài.</div>
 
                 <div class="btn-group">
                     <button class="btn btn-submit" onclick="submitAndShow('24-5')">📤 Nộp bài & Xem đáp án</button>
@@ -526,11 +612,23 @@
             <div class="student-action">
                 <div class="part-submission">
                     <div class="part-title">↳ Chặng đường Đèo & chặng đường Hầm:</div>
-                    <div class="input-group">
-                        <label>Nhập vận tốc (km/h):</label>
-                        <input type="text" class="answer-input" id="text-24-6">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập vận tốc (km/h):</label>
+                            <input type="text" class="answer-input" id="text-24-6" placeholder="Ví dụ: Đèo: 30 km/h, Hầm: 42 km/h">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-24-6">📸 Đính kèm hình ảnh các bước lập phương trình</label>
+                            <input type="file" id="file-24-6" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-6')">
+                            <div class="preview-container" id="prev-24-6">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="alert-warning" id="warn-24-6">Vui lòng hoàn thành đầy đủ thông tin hoặc tải ảnh lên trước khi nộp bài.</div>
+
                 <div class="btn-group">
                     <button class="btn btn-submit" onclick="submitAndShow('24-6')">📤 Nộp bài & Xem đáp án</button>
                 </div>
@@ -561,33 +659,56 @@
             <div class="student-action">
                 <div class="part-submission">
                     <div class="part-title">↳ Phần câu a) Chứng minh hình học & Tứ giác đồng quy:</div>
-                    <div class="upload-group">
-                        <label class="file-label" for="file-24-7-a">📸 Tải ảnh chụp nháp câu a</label>
-                        <input type="file" id="file-24-7-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-7-a')">
-                        <div class="preview-container" id="prev-24-7-a">
-                            <img src="" class="preview-img" alt="Xem trước bài làm">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Ghi chú kết quả câu a:</label>
+                            <input type="text" class="answer-input" id="text-24-7-a" placeholder="Ví dụ: Đã chứng minh xong">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-24-7-a">📸 Tải ảnh chụp nháp câu a</label>
+                            <input type="file" id="file-24-7-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-7-a')">
+                            <div class="preview-container" id="prev-24-7-a">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="part-submission">
                     <div class="part-title">↳ Phần câu b) Chứng minh hệ thức LO.LE = LV.LK:</div>
-                    <div class="upload-group">
-                        <label class="file-label" for="file-24-7-b">📸 Tải ảnh chụp bài làm câu b</label>
-                        <input type="file" id="file-24-7-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-7-b')">
-                        <div class="preview-container" id="prev-24-7-b">
-                            <img src="" class="preview-img" alt="Xem trước bài làm">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Ghi chú kết quả câu b:</label>
+                            <input type="text" class="answer-input" id="text-24-7-b" placeholder="Ví dụ: Đã chứng minh qua tam giác đồng dạng">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-24-7-b">📸 Tải ảnh chụp bài làm câu b</label>
+                            <input type="file" id="file-24-7-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-7-b')">
+                            <div class="preview-container" id="prev-24-7-b">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="part-submission">
                     <div class="part-title">↳ Phần câu c) Tính diện tích hình phẳng DMLE theo R:</div>
-                    <div class="input-group">
-                        <label>Nhập đáp số biểu thức rút gọn:</label>
-                        <input type="text" class="answer-input" id="text-24-7-c">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập đáp số biểu thức rút gọn:</label>
+                            <input type="text" class="answer-input" id="text-24-7-c" placeholder="Ví dụ: (7_sqrt(3)/24).R^2">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-24-7-c">📸 Tải ảnh chụp bài làm câu c</label>
+                            <input type="file" id="file-24-7-c" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-24-7-c')">
+                            <div class="preview-container" id="prev-24-7-c">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="alert-warning" id="warn-24-7">Vui lòng hoàn thành đầy đủ thông tin hoặc tải ảnh lên cho TẤT CẢ các câu hỏi nhỏ ở trên trước khi nộp bài.</div>
 
                 <div class="btn-group">
                     <button class="btn btn-submit" onclick="submitAndShow('24-7')">📤 Nộp bài & Xem đáp án</button>
@@ -623,22 +744,39 @@
             <div class="student-action">
                 <div class="part-submission">
                     <div class="part-title">↳ Câu a) Vẽ parabol (P):</div>
-                    <div class="upload-group">
-                        <label class="file-label" for="file-30-1-a">📸 Đính kèm ảnh chụp đồ thị bài làm</label>
-                        <input type="file" id="file-30-1-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-1-a')">
-                        <div class="preview-container" id="prev-30-1-a">
-                            <img src="" class="preview-img" alt="Xem trước bài làm">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Ghi chú bài làm đồ thị:</label>
+                            <input type="text" class="answer-input" id="text-30-1-a" placeholder="Ví dụ: Đã vẽ xong">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-30-1-a">📸 Đính kèm ảnh chụp đồ thị bài làm</label>
+                            <input type="file" id="file-30-1-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-1-a')">
+                            <div class="preview-container" id="prev-30-1-a">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="part-submission">
                     <div class="part-title">↳ Câu b) Giao điểm của (P) và (d):</div>
-                    <div class="input-group">
-                        <label>Nhập cặp tọa độ giao điểm:</label>
-                        <input type="text" class="answer-input" id="text-30-1-b">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập cặp tọa độ giao điểm:</label>
+                            <input type="text" class="answer-input" id="text-30-1-b" placeholder="Ví dụ: (3;3) và (-6;12)">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-30-1-b">📸 Đính kèm hình ảnh các bước giải câu b</label>
+                            <input type="file" id="file-30-1-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-1-b')">
+                            <div class="preview-container" id="prev-30-1-b">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="alert-warning" id="warn-30-1">Vui lòng hoàn thành đầy đủ thông tin hoặc tải ảnh lên cho TẤT CẢ các câu hỏi nhỏ ở trên trước khi nộp bài.</div>
 
                 <div class="btn-group">
                     <button class="btn btn-submit" onclick="submitAndShow('30-1')">📤 Nộp bài & Xem đáp án</button>
@@ -674,22 +812,39 @@
             <div class="student-action">
                 <div class="part-submission">
                     <div class="part-title">↳ Câu a) Chứng minh phương trình có hai nghiệm phân biệt:</div>
-                    <div class="upload-group">
-                        <label class="file-label" for="file-30-2-a">📸 Tải ảnh chứng minh Delta > 0</label>
-                        <input type="file" id="file-30-2-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-2-a')">
-                        <div class="preview-container" id="prev-30-2-a">
-                            <img src="" class="preview-img" alt="Xem trước bài làm">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập nhanh kết quả delta:</label>
+                            <input type="text" class="answer-input" id="text-30-2-a" placeholder="Ví dụ: Delta' = 30 > 0">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-30-2-a">📸 Tải ảnh chứng minh Delta > 0</label>
+                            <input type="file" id="file-30-2-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-2-a')">
+                            <div class="preview-container" id="prev-30-2-a">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="part-submission">
                     <div class="part-title">↳ Câu b) Tính giá trị định lý Vi-ét biểu thức A:</div>
-                    <div class="input-group">
-                        <label>Kết quả số A =</label>
-                        <input type="text" class="answer-input" id="text-30-2-b">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Kết quả số A =</label>
+                            <input type="text" class="answer-input" id="text-30-2-b" placeholder="Ví dụ: A = 56">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-30-2-b">📸 Tải ảnh chụp các bước khai triển biểu thức</label>
+                            <input type="file" id="file-30-2-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-2-b')">
+                            <div class="preview-container" id="prev-30-2-b">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="alert-warning" id="warn-30-2">Vui lòng hoàn thành đầy đủ thông tin hoặc tải ảnh lên cho TẤT CẢ các câu hỏi nhỏ ở trên trước khi nộp bài.</div>
 
                 <div class="btn-group">
                     <button class="btn btn-submit" onclick="submitAndShow('30-2')">📤 Nộp bài & Xem đáp án</button>
@@ -723,19 +878,39 @@
             <div class="student-action">
                 <div class="part-submission">
                     <div class="part-title">↳ Câu a) Tính sĩ số học sinh lớp 9A:</div>
-                    <div class="input-group">
-                        <label>Nhập kết quả số học sinh:</label>
-                        <input type="text" class="answer-input" id="text-30-3-a">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập kết quả số học sinh:</label>
+                            <input type="text" class="answer-input" id="text-30-3-a" placeholder="Ví dụ: 45 học sinh">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-30-3-a">📸 Tải ảnh phép tính câu a</label>
+                            <input type="file" id="file-30-3-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-3-a')">
+                            <div class="preview-container" id="prev-30-3-a">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="part-submission">
                     <div class="part-title">↳ Câu b) Tính giá trị xác suất P(A) và P(B):</div>
-                    <div class="input-group">
-                        <label>Nhập kết quả:</label>
-                        <input type="text" class="answer-input" id="text-30-3-b">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập kết quả xác suất:</label>
+                            <input type="text" class="answer-input" id="text-30-3-b" placeholder="Ví dụ: P(A) = 2/9, P(B) = 7/9">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-30-3-b">📸 Tải ảnh các bước tính xác suất câu b</label>
+                            <input type="file" id="file-30-3-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-3-b')">
+                            <div class="preview-container" id="prev-30-3-b">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="alert-warning" id="warn-30-3">Vui lòng hoàn thành đầy đủ thông tin hoặc tải ảnh lên cho TẤT CẢ các câu hỏi nhỏ ở trên trước khi nộp bài.</div>
 
                 <div class="btn-group">
                     <button class="btn btn-submit" onclick="submitAndShow('30-3')">📤 Nộp bài & Xem đáp án</button>
@@ -768,19 +943,39 @@
             <div class="student-action">
                 <div class="part-submission">
                     <div class="part-title">↳ Câu a) Thiết lập biểu thức diện tích đài phun nước:</div>
-                    <div class="input-group">
-                        <label>Biểu thức đại số:</label>
-                        <input type="text" class="answer-input" id="text-30-4-a">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Biểu thức đại số:</label>
+                            <input type="text" class="answer-input" id="text-30-4-a" placeholder="Ví dụ: S = pi * ((a-4)/2)^2">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-30-4-a">📸 Tải ảnh lập công thức câu a</label>
+                            <input type="file" id="file-30-4-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-4-a')">
+                            <div class="preview-container" id="prev-30-4-a">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="part-submission">
                     <div class="part-title">↳ Câu b) Tìm độ dài cạnh mảnh vườn a (m):</div>
-                    <div class="input-group">
-                        <label>Nhập độ dài kết quả:</label>
-                        <input type="text" class="answer-input" id="text-30-4-b">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập độ dài kết quả:</label>
+                            <input type="text" class="answer-input" id="text-30-4-b" placeholder="Ví dụ: a = 10 m">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-30-4-b">📸 Tải ảnh giải phương trình tìm a</label>
+                            <input type="file" id="file-30-4-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-4-b')">
+                            <div class="preview-container" id="prev-30-4-b">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="alert-warning" id="warn-30-4">Vui lòng hoàn thành đầy đủ thông tin hoặc tải ảnh lên cho TẤT CẢ các câu hỏi nhỏ ở trên trước khi nộp bài.</div>
 
                 <div class="btn-group">
                     <button class="btn btn-submit" onclick="submitAndShow('30-4')">📤 Nộp bài & Xem đáp án</button>
@@ -789,7 +984,7 @@
                 <div id="sol-30-4" class="solution-box">
                     <div class="solution-header">✓ ĐÁP ÁN CHÍNH THỨC</div>
                     <strong>Hướng dẫn giải:</strong><br>
-                    a) Đường kính hình tròn của đài phun nước là $a - 4\text{ (m)}$ (điều kiện $a > 4$). Bán kính là $R = \frac{a - 4}{2}\text{ (m)}$.<br>
+                    a) Đường kính hình tròn của đài phun nước là $a - 4\text{ (m)}$ (đi kiện $a > 4$). Bán kính là $R = \frac{a - 4}{2}\text{ (m)}$.<br>
                     Biểu thức diện tích đài phun nước theo $a$: $S = \pi \cdot R^2 = \pi \cdot \left(\frac{a - 4}{2}\right)^2$ (đơn vị diện tích).<br>
                     b) Thay diện tích thực tế $28,26\text{ m}^2$ và $\pi = 3,14$ vào:<br>
                     $3,14 \cdot \left(\frac{a - 4}{2}\right)^2 = 28,26 \Rightarrow \left(\frac{a - 4}{2}\right)^2 = 9 \Rightarrow \frac{a - 4}{2} = 3$ (vì $a > 4$).<br>
@@ -812,19 +1007,39 @@
             <div class="student-action">
                 <div class="part-submission">
                     <div class="part-title">↳ Câu a) Tính diện tích xung quanh 2 loại cột trụ (m²):</div>
-                    <div class="input-group">
-                        <label>Kết quả sảnh lớn và trong nhà:</label>
-                        <input type="text" class="answer-input" id="text-30-5-a">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Kết quả sảnh lớn và trong nhà:</label>
+                            <input type="text" class="answer-input" id="text-30-5-a" placeholder="Ví dụ: S1 ≈ 5.65 m², S2 ≈ 3.68 m²">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-30-5-a">📸 Tải ảnh tính toán diện tích xung quanh</label>
+                            <input type="file" id="file-30-5-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-5-a')">
+                            <div class="preview-container" id="prev-30-5-a">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="part-submission">
                     <div class="part-title">↳ Câu b) Tính tổng số tiền sơn giả đá (VNĐ):</div>
-                    <div class="input-group">
-                        <label>Nhập số tiền:</label>
-                        <input type="text" class="answer-input" id="text-30-5-b">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập số tiền:</label>
+                            <input type="text" class="answer-input" id="text-30-5-b" placeholder="Ví dụ: 20.103.000 đồng">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-30-5-b">📸 Tải ảnh tính tổng chi phí sơn</label>
+                            <input type="file" id="file-30-5-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-5-b')">
+                            <div class="preview-container" id="prev-30-5-b">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="alert-warning" id="warn-30-5">Vui lòng hoàn thành đầy đủ thông tin hoặc tải ảnh lên cho TẤT CẢ các câu hỏi nhỏ ở trên trước khi nộp bài.</div>
 
                 <div class="btn-group">
                     <button class="btn btn-submit" onclick="submitAndShow('30-5')">📤 Nộp bài & Xem đáp án</button>
@@ -858,19 +1073,39 @@
             <div class="student-action">
                 <div class="part-submission">
                     <div class="part-title">↳ Câu a) Số lần gặp nhau khi di chuyển cùng chiều:</div>
-                    <div class="input-group">
-                        <label>Nhập kết quả:</label>
-                        <input type="text" class="answer-input" id="text-30-6-a">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập kết quả cùng chiều:</label>
+                            <input type="text" class="answer-input" id="text-30-6-a" placeholder="Ví dụ: 2 lần">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-30-6-a">📸 Tải ảnh lập luận/sơ đồ câu a</label>
+                            <input type="file" id="file-30-6-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-6-a')">
+                            <div class="preview-container" id="prev-30-6-a">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="part-submission">
                     <div class="part-title">↳ Câu b) Số lần gặp nhau khi di chuyển ngược chiều:</div>
-                    <div class="input-group">
-                        <label>Nhập kết quả:</label>
-                        <input type="text" class="answer-input" id="text-30-6-b">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập kết quả ngược chiều:</label>
+                            <input type="text" class="answer-input" id="text-30-6-b" placeholder="Ví dụ: 4 lần">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-30-6-b">📸 Tải ảnh lập luận/sơ đồ câu b</label>
+                            <input type="file" id="file-30-6-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-6-b')">
+                            <div class="preview-container" id="prev-30-6-b">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="alert-warning" id="warn-30-6">Vui lòng hoàn thành đầy đủ thông tin hoặc tải ảnh lên cho TẤT CẢ các câu hỏi nhỏ ở trên trước khi nộp bài.</div>
 
                 <div class="btn-group">
                     <button class="btn btn-submit" onclick="submitAndShow('30-6')">📤 Nộp bài & Xem đáp án</button>
@@ -897,33 +1132,56 @@
             <div class="student-action">
                 <div class="part-submission">
                     <div class="part-title">↳ Phần câu a) Chứng minh tứ giác AMOI nội tiếp:</div>
-                    <div class="upload-group">
-                        <label class="file-label" for="file-30-7-a">📸 Tải ảnh bài làm câu a</label>
-                        <input type="file" id="file-30-7-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-7-a')">
-                        <div class="preview-container" id="prev-30-7-a">
-                            <img src="" class="preview-img" alt="Xem trước bài làm">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Ghi chú kết quả câu a:</label>
+                            <input type="text" class="answer-input" id="text-30-7-a" placeholder="Ví dụ: Đã chứng minh hoàn thành">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-30-7-a">📸 Tải ảnh bài làm câu a</label>
+                            <input type="file" id="file-30-7-a" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-7-a')">
+                            <div class="preview-container" id="prev-30-7-a">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="part-submission">
                     <div class="part-title">↳ Phần câu b) Chứng minh hệ thức FI.FA = FC.FD:</div>
-                    <div class="upload-group">
-                        <label class="file-label" for="file-30-7-b">📸 Tải ảnh bài làm câu b</label>
-                        <input type="file" id="file-30-7-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-7-b')">
-                        <div class="preview-container" id="prev-30-7-b">
-                            <img src="" class="preview-img" alt="Xem trước bài làm">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Ghi chú kết quả câu b:</label>
+                            <input type="text" class="answer-input" id="text-30-7-b" placeholder="Ví dụ: Chứng minh qua tam giác đồng dạng bắc cầu">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-30-7-b">📸 Tải ảnh bài làm câu b</label>
+                            <input type="file" id="file-30-7-b" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-7-b')">
+                            <div class="preview-container" id="prev-30-7-b">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="part-submission">
                     <div class="part-title">↳ Phần câu c) Tính diện tích hình giới hạn theo R:</div>
-                    <div class="input-group">
-                        <label>Nhập kết quả biểu thức diện tích:</label>
-                        <input type="text" class="answer-input" id="text-30-7-c">
+                    <div class="submission-methods">
+                        <div class="input-group">
+                            <label>Nhập kết quả biểu thức diện tích:</label>
+                            <input type="text" class="answer-input" id="text-30-7-c" placeholder="Ví dụ: S = 2R^2 - S_quat">
+                        </div>
+                        <div class="upload-group" style="margin-top: 8px;">
+                            <label class="file-label" for="file-30-7-c">📸 Tải ảnh bài làm câu c</label>
+                            <input type="file" id="file-30-7-c" class="file-input" accept="image/*" onchange="previewImage(this, 'prev-30-7-c')">
+                            <div class="preview-container" id="prev-30-7-c">
+                                <img src="" class="preview-img" alt="Xem trước bài làm">
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="alert-warning" id="warn-30-7">Vui lòng hoàn thành đầy đủ thông tin hoặc tải ảnh lên cho TẤT CẢ các câu hỏi nhỏ ở trên trước khi nộp bài.</div>
 
                 <div class="btn-group">
                     <button class="btn btn-submit" onclick="submitAndShow('30-7')">📤 Nộp bài & Xem đáp án</button>
@@ -978,45 +1236,69 @@
         }
     }
 
-    // Logic kiểm tra rà soát động thông minh: Tự động quét các ô nhập liệu/hình ảnh nằm trong Bài đó
+    // Logic kiểm tra rà soát động thông minh & Xử lý độ trễ hiển thị đáp án mượt mà
     function submitAndShow(idKey) {
         const targetBox = document.getElementById('box-' + idKey);
         const solBox = document.getElementById('sol-' + idKey);
+        const warnBox = document.getElementById('warn-' + idKey);
         
         if (!targetBox || !solBox) return;
 
-        // Quét tất cả các thẻ input text và input file thuộc phạm vi bài tập hiện tại
-        const textInputs = targetBox.querySelectorAll('input[type="text"]');
-        const fileInputs = targetBox.querySelectorAll('input[type="file"]');
+        // Quét cấu trúc phân chia từng phần trong bài tập lớn hiện tại
+        const parts = targetBox.querySelectorAll('.part-submission');
+        const submitBtn = targetBox.querySelector('.btn-submit');
         
-        let hasData = false;
+        let allPartsValid = true;
 
-        textInputs.forEach(input => {
-            if (input.value.trim() !== "") {
-                hasData = true;
+        // Kiểm tra xem MỖI câu hỏi nhỏ (part) có ít nhất 1 trong 2 hình thức nộp bài chưa
+        parts.forEach(part => {
+            const textInput = part.querySelector('input[type="text"]');
+            const fileInput = part.querySelector('input[type="file"]');
+            
+            let partHasData = false;
+            
+            if (textInput && textInput.value.trim() !== "") {
+                partHasData = true;
+            }
+            if (fileInput && fileInput.files && fileInput.files.length > 0) {
+                partHasData = true;
+            }
+            
+            if (!partHasData) {
+                allPartsValid = false;
             }
         });
 
-        fileInputs.forEach(input => {
-            if (input.files && input.files.length > 0) {
-                hasData = true;
-            }
-        });
-
-        if (!hasData) {
-            alert("Vui lòng nhập đáp án hoặc đính kèm hình ảnh bài làm trước khi xem đáp án chi tiết nhé!");
+        // Nếu có bất kỳ câu hỏi nhỏ nào bị bỏ trống hoàn toàn, hiển thị dòng cảnh báo và dừng lại
+        if (!allPartsValid) {
+            if (warnBox) warnBox.style.display = 'block';
             return;
         }
 
-        // ĐÃ XÓA DÒNG THÔNG BÁO ALERT Ở ĐÂY ĐỂ ĐÁP ÁN HIỂN THỊ TRỰC TIẾP
-        solBox.classList.add('visible');
+        // Ẩn dòng cảnh báo nếu dữ liệu hợp lệ
+        if (warnBox) warnBox.style.display = 'none';
 
-        // Ép MathJax biên dịch lại nội dung hiển thị trong hộp đáp án vừa mở ra
-        if (typeof MathJax !== 'undefined' && MathJax.typesetPromise) {
-            MathJax.typesetPromise([solBox]).catch(function (err) {
-                console.log("MathJax error: " + err.message);
-            });
-        }
+        // Tạo hiệu ứng Đang xử lý (Loading) trên nút bấm để tạo độ trễ trực quan
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Đang chấm bài... ⏳";
+
+        // Thiết lập độ trễ an toàn từ 1 - 2 giây (ở đây chọn 1500ms = 1.5 giây)
+        setTimeout(function() {
+            // Khôi phục trạng thái nút bấm
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+
+            // Hiển thị trực tiếp hộp đáp án chính thức
+            solBox.classList.add('visible');
+
+            // Ép MathJax biên dịch lại nội dung công thức toán trong hộp đáp án vừa hiển thị
+            if (typeof MathJax !== 'undefined' && MathJax.typesetPromise) {
+                MathJax.typesetPromise([solBox]).catch(function (err) {
+                    console.log("MathJax error: " + err.message);
+                });
+            }
+        }, 1500); 
     }
 </script>
 
