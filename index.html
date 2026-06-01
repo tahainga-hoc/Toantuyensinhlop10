@@ -1,29 +1,589 @@
-<div class="exercise-box">
-    <p><strong>Bài 4. (1,0 điểm)</strong> Bốn nửa hình tròn với bán kính là 2 được đặt trong hình vuông ABCD như hình bên.</p>
-    <p>a) Viết biểu thức tính diện tích phần không tô màu theo x.</p>
-    <p>b) Tính diện tích hình vuông ABCD.</p>
-    <div class="image-container">
-        <img src="images/De24.Bai4.png" alt="Hình minh họa Bài 4 Đề 24" class="exercise-img">
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Ôn Luyện Tuyển Sinh Lớp 10 - Môn Toán</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #2ecc71;
+            --bg-color: #f8f9fa;
+            --box-bg: #ffffff;
+            --text-color: #333333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 { margin: 0; font-size: 2.2rem; }
+        .subtitle { margin-top: 10px; opacity: 0.9; font-size: 1.1rem; }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background-color: #ddd;
+            color: #666;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .exam-panel {
+            display: none;
+        }
+
+        .exam-panel.active {
+            display: block;
+        }
+
+        .exercise-box {
+            background-color: var(--box-bg);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .exercise-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .exercise-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        /* Phần để học sinh nhập câu trả lời */
+        .student-action {
+            background-color: #fcfcfc;
+            border: 1px dashed #ccc;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .answer-input {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            width: 250px;
+            max-width: 100%;
+        }
+
+        /* Nút chức năng đáp án & video */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s ease;
+        }
+
+        .btn-ans {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-ans:hover { background-color: #1a252f; }
+
+        .btn-vid {
+            background-color: #e74c3c;
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .btn-vid:hover { background-color: #c0392b; }
+
+        /* Vùng hiển thị Đáp án chi tiết */
+        .solution-box {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #eef7f2;
+            border-left: 4px solid var(--success-color);
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .solution-box.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>HỆ THỐNG ÔN LUYỆN TOÁN VÀO LỚP 10</h1>
+        <p class="subtitle">Rà soát, điền đáp án ngắn và xem lời giải chi tiết trực quan</p>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchExam('exam24', this)">ĐỀ SỐ 24</button>
+        <button class="tab-btn" onclick="switchExam('exam30', this)">ĐỀ SỐ 30</button>
+    </div>
+
+    <div id="exam24" class="exam-panel active">
+        <div class="exercise-box">
+            <div class="exercise-title">Bài 1 (1,5 điểm)</div>
+            <p>Cho Parabol \((P): y = x^2\)[cite: 1, 56].</p>
+            <p>a) Vẽ đồ thị hàm số \((P)\) lên mặt phẳng tọa độ[cite: 2, 57].</p>
+            <p>b) Tìm điểm \(A\) thuộc \((P)\) khác gốc tọa độ có hoành độ gấp ba lần tung độ[cite: 3, 58].</p>
+            
+            <div class="student-action">
+                <div class="input-group">
+                    <label>Đáp số câu b) Tọa độ điểm A là:</label>
+                    <input type="text" class="answer-input" placeholder="Ví dụ: (1/3; 1/9)">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-ans" onclick="toggleSolution('sol24-1')">Xem đáp án chính thức</button>
+                    <a href="https://www.youtube.com/watch?v=aFfLMdp_1QE" target="_blank" class="btn-vid">🎬 Video bài giảng liên quan</a>
+                </div>
+                <div id="sol24-1" class="solution-box">
+                    <strong>Hướng dẫn giải câu b):</strong> Hoành độ gấp 3 lần tung độ suy ra \(x_A = 3y_A\)[cite: 28]. Thay vào phương trình đồ thị: \(y_A = (3y_A)^2 \Leftrightarrow y_A = 9y_A^2\)[cite: 28]. Vì điểm khác gốc tọa độ nên \(y_A = \frac{1}{9}\) [cite: 28] \(\rightarrow x_A = \frac{1}{3}\)[cite: 29]. Vậy tọa độ điểm cần tìm là \(A\left(\frac{1}{3}; \frac{1}{9}\right)\)[cite: 29].
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <div class="exercise-title">Bài 2 (1,5 điểm)</div>
+            <p>Cho phương trình \(x^2 - mx - 2 = 0\) (with \(m\) là tham số)[cite: 4, 59].</p>
+            <p>a) Chứng minh phương trình luôn có hai nghiệm phân biệt với mọi \(m\)[cite: 5, 60].</p>
+            <p>b) Gọi \(x_1, x_2\) là hai nghiệm của phương trình[cite: 6, 61]. Không giải phương trình, tính giá trị của biểu thức: \[M = \frac{x_1^2 + x_1 - 2}{x_1} - \frac{x_2^2 + x_2 - 2}{x_2}\] [cite: 7, 63]</p>
+            
+            <div class="student-action">
+                <div class="input-group">
+                    <label>Đáp số câu b) Giá trị biểu thức M =</label>
+                    <input type="text" class="answer-input" placeholder="Nhập giá trị số">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-ans" onclick="toggleSolution('sol24-2')">Xem đáp án chính thức</button>
+                    <a href="https://www.youtube.com/watch?v=3_T_8jF6li8" target="_blank" class="btn-vid">🎬 Video Hệ thức Vi-ét</a>
+                </div>
+                <div id="sol24-2" class="solution-box">
+                    <strong>Hướng dẫn giải:</strong><br>
+                    a) Ta có \(a = 1, c = -2 \rightarrow a \cdot c = -2 < 0\) nên phương trình luôn luôn có 2 nghiệm phân biệt trái dấu với mọi \(m\), hoặc xét \(\Delta = m^2 + 8 > 0 \;\forall m\)[cite: 29].<br>
+                    b) Áp dụng Định lý Viète: \(x_1 + x_2 = m\) và \(x_1 x_2 = -2\)[cite: 30]. Biến đổi biểu thức \(M = (x_1 + 1 - \frac{2}{x_1}) - (x_2 + 1 - \frac{2}{x_2})\). Do \(x_1, x_2\) là nghiệm nên \(-2 = x_1 x_2\). Thay vào rút gọn ra kết quả cuối cùng: \(M = 0\)[cite: 30].
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <div class="exercise-title">Bài 3 (1,0 điểm)</div>
+            <p>Một hộp chứa các viên bi màu vàng và màu đỏ có kích thước và khối lượng như nhau[cite: 7, 64]. Lan lấy ra ngẫu nhiên một viên bi từ hộp, xem màu rồi trả lại[cite: 8, 65].</p>
+            <p>a) Lặp lại thử nghiệm đó 80 lần, Lan thấy có 25 lần lấy được viên bi màu đỏ[cite: 9, 66]. Hãy tính xác suất thực nghiệm của biến cố Lan "lấy được viên bi màu vàng" sau 80 lần thử[cite: 10].</p>
+            <p>b) Biết hộp đó chứa 6 viên bi màu đỏ và một số viên bi màu vàng và xác suất của biến cố lấy được viên bi màu đỏ ban đầu là 0,4[cite: 10]. Hỏi trong hộp có tất cả bao nhiêu viên bi? [cite: 10, 68]</p>
+            
+            <div class="student-action">
+                <div class="input-group">
+                    <label>Đáp số câu a) (Phân số tối giản):</label>
+                    <input type="text" class="answer-input" placeholder="Ví dụ: 11/16">
+                </div>
+                <div class="input-group" style="margin-top: 10px;">
+                    <label>Đáp số câu b) Tổng số viên bi trong hộp:</label>
+                    <input type="text" class="answer-input" placeholder="Nhập số viên bi">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-ans" onclick="toggleSolution('sol24-3')">Xem đáp án chính thức</button>
+                    <a href="https://www.youtube.com/watch?v=9RlAs0vWieg" target="_blank" class="btn-vid">🎬 Video Xác suất thực nghiệm</a>
+                </div>
+                <div id="sol24-3" class="solution-box">
+                    <strong>Hướng dẫn giải:</strong><br>
+                    a) Số lần bốc được bi vàng: \(80 - 25 = 55\) lần[cite: 30]. Xác suất thực nghiệm: \(\frac{55}{80} = \frac{11}{16}\)[cite: 30].<br>
+                    b) Gọi tổng số bi là \(N\). Theo công thức xác suất: \(\frac{6}{N} = 0,4 \Rightarrow N = 6 : 0,4 = 15\) viên bi[cite: 30, 31].
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <div class="exercise-title">Bài 4 (1,0 điểm)</div>
+            <p>Bốn nửa hình tròn với bán kính là 2 được đặt trong hình vuông \(ABCD\) như hình bên[cite: 10, 69].</p>
+            <p>a) Viết biểu thức tính diện tích phần không tô màu theo \(x\)[cite: 10, 70].</p>
+            <p>b) Tính diện tích hình vuông \(ABCD\)[cite: 11, 71].</p>
+            
+            <div class="image-container">
+                <img src="images/De24.Bai4.png" alt="Hình minh họa Bài 4 Đề 24" class="exercise-img">
+            </div>
+
+            <div class="student-action">
+                <div class="input-group">
+                    <label>Đáp số câu b) Diện tích hình vuông ABCD =</label>
+                    <input type="text" class="answer-input" placeholder="Ví dụ: 16 + 8&radic;3">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-ans" onclick="toggleSolution('sol24-4')">Xem đáp án chính thức</button>
+                </div>
+                <div id="sol24-4" class="solution-box">
+                    <strong>Hướng dẫn giải:</strong><br>
+                    a) Cạnh hình vuông là \(4 + x\)[cite: 31]. Diện tích 4 nửa hình tròn chính là diện tích của 2 hình tròn bán kính bằng 2: \(2 \cdot \pi \cdot 2^2 = 8\pi\)[cite: 31]. Diện tích phần không tô màu: \((4+x)^2 - 8\pi\)[cite: 31].<br>
+                    b) Áp dụng định lý Pythagore vào tam giác vuông \(MNB\) dựng từ tâm nửa đường tròn, giải hệ phương trình hình học tìm được \(x = -2 + 2\sqrt{3}\)[cite: 32]. Độ dài cạnh hình vuông bằng \(2 + 2\sqrt{3}\)[cite: 32]. Diện tích hình vuông là \(S = (2 + 2\sqrt{3})^2 = 16 + 8\sqrt{3}\)[cite: 33].
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <div class="exercise-title">Bài 5 (1,0 điểm)</div>
+            <p>Một lon nước ngọt hình trụ có đường kính mặt trong đáy là \(6,5\text{ cm}\) chứa \(355\text{ ml}\) nước ngọt[cite: 11, 77]. Thường đóng gói 24 lon khít vào một thùng carton[cite: 11, 78].</p>
+            <p>a) Tính chiều cao lon (biết nước chiếm 90% thể tích lon) và thể tích của thùng chứa 24 lon[cite: 12].</p>
+            <p>b) Sử dụng loại ly hình trụ chứa được \(310\text{ ml}\), lượng nước rót vào chiếm 60% dung tích ly[cite: 13, 14]. Hỏi mua 2 thùng thì rót được bao nhiêu ly có đá tương tự? [cite: 15]</p>
+            
+            <div class="image-container">
+                <img src="images/De24.Bai5.jpg" alt="Thùng nước ngọt 24 lon" class="exercise-img">
+            </div>
+
+            <div class="student-action">
+                <div class="input-group">
+                    <label>Đáp số câu a) Chiều cao lon (cm) & Thể tích thùng (cm³):</label>
+                    <input type="text" class="answer-input" placeholder="Ví dụ: 12 cm và 12168 cm³">
+                </div>
+                <div class="input-group" style="margin-top: 10px;">
+                    <label>Đáp số câu b) Tổng số ly nước ngọt rót được:</label>
+                    <input type="text" class="answer-input" placeholder="Nhập số ly">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-ans" onclick="toggleSolution('sol24-5')">Xem đáp án chính thức</button>
+                    <a href="https://www.youtube.com/watch?v=Ezod4u9Bygo" target="_blank" class="btn-vid">🎬 Video Tính thể tích khối trụ</a>
+                </div>
+                <div id="sol24-5" class="solution-box">
+                    <strong>Hướng dẫn giải:</strong><br>
+                    a) Thể tích định mức một lon: \(355 : 90\% = \frac{3550}{9}\text{ ml}\)[cite: 33]. Chiều cao hình trụ: \(h = V / (\pi \cdot R^2) \approx 12\text{ cm}\)[cite: 34]. Kích thước thùng sắp khít xếp \(6 \times 4\) lon: Dài \(39\text{ cm}\), Rộng \(26\text{ cm}\), Cao \(12\text{ cm}\) [cite: 34, 35] \(\rightarrow V_{thùng} = 39 \cdot 26 \cdot 12 = 12168\text{ cm}^3\)[cite: 35].<br>
+                    b) Thể tích nước thực tế trong mỗi ly có đá: \(310 \cdot 60\% = 186\text{ ml}\)[cite: 35]. Tổng dung tích 2 thùng: \(355 \cdot 48 = 17040\text{ ml}\). Số ly nước: \(17040 / 186 \approx 91,6\)[cite: 35]. Làm tròn được 91 ly[cite: 35].
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <div class="exercise-title">Bài 6 (1,0 điểm)</div>
+            <p>Huy tham quan di chuyển trên đèo Hải Vân dài \(20\text{ km}\)[cite: 16, 17]. Lúc về qua hầm đường bộ dài \(6,3\text{ km}\)[cite: 18]. Vận tốc trong hầm nhanh hơn trên đèo \(12\text{ km/h}\), tổng thời gian di chuyển cả đi lẫn về là \(49\) phút[cite: 19]. Tính vận tốc trên mỗi chặng[cite: 20].</p>
+            
+            <div class="student-action">
+                <div class="input-group">
+                    <label>Đáp số (Vận tốc đèo & Vận tốc hầm):</label>
+                    <input type="text" class="answer-input" placeholder="Ví dụ: 30 km/h và 42 km/h">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-ans" onclick="toggleSolution('sol24-6')">Xem đáp án chính thức</button>
+                </div>
+                <div id="sol24-6" class="solution-box">
+                    <strong>Hướng dẫn giải:</strong> Đổi \(49\text{ phút} = \frac{49}{60}\text{ giờ}\)[cite: 36]. Gọi vận tốc leo đèo là \(x > 0\)[cite: 37]. Ta có phương trình thời gian: \[\frac{20}{x} + \frac{6,3}{x+12} = \frac{49}{60}\] [cite: 39, 41] Giải phương trình bậc hai thu được nghiệm hợp lệ \(x = 30\text{ km/h}\)[cite: 41, 42]. Vận tốc chặng đi hầm là \(30 + 12 = 42\text{ km/h}\)[cite: 42].
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <div class="exercise-title">Bài 7 (3,0 điểm)</div>
+            <p>Cho đường tròn \((O)\) đường kính \(AB\)[cite: 21]. Kẻ hai tiếp tuyến \(Ax, By\) và tiếp tuyến tại điểm \(C\) cắt chúng tại \(D, E\)[cite: 22].</p>
+            <p>a) Chứng minh \(DE = AD + BE\) và tứ giác \(CAOD\) cùng thuộc một đường tròn[cite: 22].</p>
+            <p>b) \(OE\) cắt đường tròn tại \(V, K\), cắt \(BC\) tại \(L\)[cite: 23]. Chứng minh \(LO \cdot LE = LV \cdot LK\) và \(CV\) là phân giác \(\widehat{LCE}\)[cite: 24].</p>
+            <p>c) Gọi \(M = CA \cap DO\)[cite: 25]. Tính diện tích tứ giác \(DMLE\) theo \(R\) khi biết \(BE = R\sqrt{3}\)[cite: 25].</p>
+            
+            <div class="student-action">
+                <div class="btn-group">
+                    <button class="btn btn-ans" onclick="toggleSolution('sol24-7')">Xem hướng dẫn chứng minh hình học</button>
+                </div>
+                <div id="sol24-7" class="solution-box">
+                    <strong>Tóm tắt ý chính chứng minh:</strong><br>
+                    a) Áp dụng tính chất hai tiếp tuyến cắt nhau: \(AD = DC\) và \(BE = EC \Rightarrow DE = AD + BE\)[cite: 43, 44]. Góc \(\widehat{DAO} = \widehat{DCO} = 90^\circ\) nên tứ giác nội tiếp đường tròn đường kính \(DO\)[cite: 47].<br>
+                    b) Chứng minh tam giác đồng dạng \(\Delta CLO \sim \Delta ELC \rightarrow CL^2 = LO \cdot LE\)[cite: 49]. Đồng thời hệ thức cát tuyến hình học tròn chỉ ra \(CL^2 = LV \cdot LK\)[cite: 49].<br>
+                    c) Khi \(BE = R\sqrt{3}\), tính toán các cạnh vuông góc, tính diện tích tam giác lớn \(\Delta DOE\) rồi trừ đi phần diện tích \(\Delta OML\) không liên quan để ra kết quả theo diện tích đề bài yêu cầu[cite: 49, 51].
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="exam30" class="exam-panel">
+        <div class="exercise-box">
+            <div class="exercise-title">Bài 1 (1,5 điểm)</div>
+            <p>Cho parabol \((P): y = \frac{1}{3}x^2\)[cite: 269].</p>
+            <p>a) Vẽ đồ thị hàm số \((P)\)[cite: 269, 341].</p>
+            <p>b) Tìm tọa độ giao điểm của \((P)\) và đường thẳng \((d): y = -x + 6\) bằng phép toán[cite: 270].</p>
+            
+            <div class="student-action">
+                <div class="input-group">
+                    <label>Đáp số câu b) Tọa độ các giao điểm tìm được là:</label>
+                    <input type="text" class="answer-input" placeholder="Ví dụ: (3;3), (-6;12)">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-ans" onclick="toggleSolution('sol30-1')">Xem đáp án chính thức</button>
+                    <a href="https://www.youtube.com/watch?v=aFfLMdp_1QE" target="_blank" class="btn-vid">🎬 Video Hoành độ giao điểm</a>
+                </div>
+                <div id="sol30-1" class="solution-box">
+                    <strong>Hướng dẫn giải câu b):</strong> Lập phương trình hoành độ giao điểm: \(\frac{1}{3}x^2 = -x + 6 \Leftrightarrow \frac{1}{3}x^2 + x - 6 = 0\)[cite: 306]. Tìm ra nghiệm \(x = 3\) hoặc \(x = -6\)[cite: 306]. Thế ngược tìm lại tung độ tương ứng, ta có hai giao điểm cố định là \((3; 3)\) và \((-6; 12)\)[cite: 307].
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <div class="exercise-title">Bài 2 (1,0 điểm)</div>
+            <p>Cho phương trình bậc hai: \(3x^2 - 12x + 2 = 0\)[cite: 271, 344].</p>
+            <p>a) Chứng minh phương trình trên luôn có hai nghiệm phân biệt[cite: 271, 345].</p>
+            <p>b) Gọi \(x_1, x_2\) là hai nghiệm thực[cite: 272, 346]. Không giải phương trình, hãy tính toán giá trị biểu thức: \[A = x_1(x_1^2 + x_2) + x_2(x_2^2 - x_1)\] [cite: 273, 347]</p>
+            
+            <div class="student-action">
+                <div class="input-group">
+                    <label>Đáp số câu b) Giá trị biểu thức A =</label>
+                    <input type="text" class="answer-input" placeholder="Nhập giá trị số">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-ans" onclick="toggleSolution('sol30-2')">Xem đáp án chính thức</button>
+                    <a href="https://www.youtube.com/watch?v=LApq7sBxfvM" target="_blank" class="btn-vid">🎬 Video Vi-ét nâng cao</a>
+                </div>
+                <div id="sol30-2" class="solution-box">
+                    <strong>Hướng dẫn giải:</strong><br>
+                    a) Tính biệt thức \(\Delta' = (-6)^2 - 3 \cdot 2 = 30 > 0\) nên phương trình luôn có 2 nghiệm phân biệt[cite: 308].<br>
+                    b) Theo Viète: \(x_1 + x_2 = 4\) và \(x_1 x_2 = \frac{2}{3}\)[cite: 308]. Phân tích biểu thức nhân tử: \(A = x_1^3 + x_2^3 = (x_1+x_2)[(x_1+x_2)^2 - 3x_1x_2]\)[cite: 308]. Thay số vào tính toán: \(A = 4 \cdot (4^2 - 3 \cdot \frac{2}{3}) = 4 \cdot 14 = 56\)[cite: 308].
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <div class="exercise-title">Bài 3 (1,5 điểm)</div>
+            <p>Biểu đồ cột dưới đây biểu diễn xếp loại học tập học kỳ 1 của các học sinh thuộc lớp 9A[cite: 274, 348].</p>
+            
+            <div class="image-container">
+                <img src="images/De30.Bai3.png" alt="Biểu đồ kết quả học tập lớp 9A" class="exercise-img">
+            </div>
+
+            <p>Quan sát dữ liệu trực quan trên biểu đồ cột và trả lời câu hỏi[cite: 275, 366]:</p>
+            <p>a) Lớp 9A có tổng cộng bao nhiêu học sinh? [cite: 276, 367]</p>
+            <p>b) Chọn ngẫu nhiên một học sinh trong lớp. Tính xác suất của các biến cố sau[cite: 276, 368]:<br>
+            - Biến cố \(A\): "Học sinh được chọn đạt loại Giỏi"[cite: 277, 369].<br>
+            - Biến cố \(B\): "Học sinh được chọn đạt học lực từ Khá trở lên"[cite: 278, 370].</p>
+            
+            <div class="student-action">
+                <div class="input-group">
+                    <label>Đáp số câu a) Sĩ số lớp:</label>
+                    <input type="text" class="answer-input" placeholder="Nhập số học sinh">
+                </div>
+                <div class="input-group" style="margin-top: 10px;">
+                    <label>Đáp số câu b) Xác suất P(A) và P(B):</label>
+                    <input type="text" class="answer-input" placeholder="Ví dụ: 2/9 và 7/9">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-ans" onclick="toggleSolution('sol30-3')">Xem đáp án chính thức</button>
+                </div>
+                <div id="sol30-3" class="solution-box">
+                    <strong>Hướng dẫn giải nhanh:</strong><br>
+                    a) Tổng số học sinh lớp 9A: \(10 (\text{Giỏi}) + 25 (\text{Khá}) + 7 (\text{Đạt}) + 3 (\text{Chưa đạt}) = 45\) học sinh[cite: 275, 308].<br>
+                    b) Xác suất biến cố \(A\): \(P(A) = \frac{10}{45} = \frac{2}{9}\)[cite: 310]. Xác suất biến cố \(B\) (Khá + Giỏi = 35 học sinh): \(P(B) = \frac{35}{45} = \frac{7}{9}\)[cite: 311, 312].
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <div class="exercise-title">Bài 4 (1,0 điểm)</div>
+            <p>Khu vườn hình vuông có độ dài cạnh là \(a\text{ (m)}\)[cite: 279]. Thiết kế một đài phun nước hình tròn ở chính giữa có đường kính nhỏ hơn cạnh khu vườn là \(4\text{ m}\)[cite: 280]. Phần đất còn lại xung quanh dùng để lát gạch biệt thự[cite: 281].</p>
+            <p>a) Viết biểu thức biểu diễn diện tích phần đất làm đài phun nước theo \(a\)[cite: 281].</p>
+            <p>b) Biết diện tích phần thiết kế đài phun nước này đo được là \(28,26\text{ m}^2\), tính chiều dài cạnh \(a\) của khu vườn (lấy \(\pi = 3,14\))[cite: 282, 283].</p>
+            
+            <div class="image-container">
+                <img src="images/De30.Bai4.png" alt="Sơ đồ khu vườn hình vuông" class="exercise-img">
+            </div>
+
+            <div class="student-action">
+                <div class="input-group">
+                    <label>Đáp số câu b) Cạnh khu vườn a =</label>
+                    <input type="text" class="answer-input" placeholder="Đơn vị: mét">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-ans" onclick="toggleSolution('sol30-4')">Xem đáp án chính thức</button>
+                </div>
+                <div id="sol30-4" class="solution-box">
+                    <strong>Hướng dẫn giải:</strong><br>
+                    a) Bán kính đài phun nước hình tròn: \(R = \frac{a - 4}{2}\)[cite: 313]. Biểu thức diện tích: \(S = \pi \cdot R^2 = \frac{\pi}{4}(a^2 - 8a + 16)\)[cite: 314].<br>
+                    b) Theo đề bài: \(\frac{3,14}{4}(a^2 - 8a + 16) = 28,26 \Leftrightarrow a^2 - 8a + 16 = 36 \Leftrightarrow a^2 - 8a - 20 = 0\)[cite: 315]. Phương trình cho nghiệm dương hợp lệ \(a = 10\text{ m}\)[cite: 315, 316].
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <div class="exercise-title">Bài 5 (1,0 điểm)</div>
+            <p>Sử dụng 10 cây cột nhà hình trụ tròn bằng bê tông có chiều cao đồng đều là \(4,5\text{ m}\)[cite: 283]. Trong đó gồm 4 cây cột sảnh đường kính \(40\text{ cm}\) và 6 cây cột trong nhà đường kính \(26\text{ cm}\)[cite: 284].</p>
+            <p>a) Tính diện tích xung quanh của một cây cột trước sảnh và một cây cột trong nhà[cite: 285].</p>
+            <p>b) Chi phí sơn trang trí giả đá là \(450.000\text{ đồng/m}^2\)[cite: 286, 287]. Tính tổng số tiền chủ nhà cần chi để sơn toàn bộ 10 cây cột đó[cite: 288].</p>
+            
+            <div class="student-action">
+                <div class="input-group">
+                    <label>Đáp số câu b) Tổng chi phí sơn cột (VNĐ):</label>
+                    <input type="text" class="answer-input" placeholder="Làm tròn đến hàng nghìn">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-ans" onclick="toggleSolution('sol30-5')">Xem đáp án chính thức</button>
+                </div>
+                <div id="sol30-5" class="solution-box">
+                    <strong>Hướng dẫn giải:</strong><br>
+                    a) Đổi đường kính sang mét: \(R_1 = 0,2\text{ m}\); \(R_2 = 0,13\text{ m}\)[cite: 317].<br>
+                    - \(S_{xq\_sảnh} = 2\pi \cdot 0,2 \cdot 4,5 = 1,8\pi\text{ m}^2\)[cite: 318].<br>
+                    - \(S_{xq\_nhà} = 2\pi \cdot 0,13 \cdot 4,5 = 1,17\pi\text{ m}^2\)[cite: 318].<br>
+                    b) Tổng diện tích xung quanh 10 cây cột: \(S = 4 \cdot (1,8\pi) + 6 \cdot (1,17\pi) = 14,22\pi\text{ m}^2\)[cite: 318]. Chi phí sơn: \(14,22 \cdot 3,1416 \cdot 450.000 \approx 20.103.000\text{ đồng}\)[cite: 318].
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <div class="exercise-title">Bài 6 (1,0 điểm)</div>
+            <p>Anh Hùng chạy một vòng sân hết 10 phút, bác Sáu đi bộ một vòng khép kín hết 30 phút[cite: 292, 293]. Cùng khởi hành đồng thời tại một vị trí cổng công viên An Sương[cite: 294]. Nếu anh Hùng chạy đúng 3 vòng thì gặp bác Sáu bao nhiêu lần (không tính lúc khởi hành)? [cite: 295, 296]</p>
+            <p>a) Trường hợp hai người di chuyển cùng chiều[cite: 296].</p>
+            <p>b) Trường hợp hai người di chuyển ngược chiều[cite: 297].</p>
+            
+            <div class="student-action">
+                <div class="input-group">
+                    <label>Đáp số (Số lần gặp câu a và b):</label>
+                    <input type="text" class="answer-input" placeholder="Ví dụ: 2 lần và 4 lần">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-ans" onclick="toggleSolution('sol30-6')">Xem đáp án chính thức</button>
+                </div>
+                <div id="sol30-6" class="solution-box">
+                    <strong>Hướng dẫn giải cách đơn giản:</strong> Anh Hùng chạy hoàn thành xong 3 vòng hết quỹ thời gian là: \(3 \cdot 10 = 30\) phút[cite: 320, 323]. Trong 30 phút này, bác Sáu chỉ vừa hoàn thành đúng 1 vòng đi bộ[cite: 320, 324].<br>
+                    a) Di chuyển cùng chiều: Số lần đuổi kịp vượt qua nhau là \(3 - 1 = 2\) lần[cite: 325].<br>
+                    b) Di chuyển ngược chiều: Số lần chạm mặt trực diện là \(3 + 1 = 4\) lần[cite: 326].
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <div class="exercise-title">Bài 7 (3,0 điểm)</div>
+            <p>Cho đường tròn \((O)\), điểm \(A\) nằm ngoài đường tròn vẽ hai tiếp tuyến \(AM, AN\)[cite: 297, 298]. Kẻ dây \(BC\) qua giao điểm \(H\) sao cho \(BC \perp OM\)[cite: 298, 299]. Đường thẳng \(AC\) cắt đường tròn tại điểm thứ hai là \(D\)[cite: 300]. Gọi \(I\) là trung điểm \(CD\) và \(F\) là giao điểm của \(MN\) và \(CD\)[cite: 300].</p>
+            <p>a) Chứng minh tứ giác \(AMOI\) nội tiếp đường tròn[cite: 301].</p>
+            <p>b) Chứng minh hệ thức hình học: \(FI \cdot FA = FC \cdot FD\)[cite: 302].</p>
+            <p>c) Nếu độ dài tiếp tuyến \(AM = 2R\), hãy tính diện tích giới hạn bởi hai đoạn tiếp tuyến \(AM, AN\) và cung nhỏ \(\widehat{MN}\) theo bán kính \(R\)[cite: 302, 303].</p>
+            
+            <div class="student-action">
+                <div class="input-group">
+                    <label>Đáp số câu c) Diện tích phẳng cần tìm =</label>
+                    <input type="text" class="answer-input" placeholder="Kết quả theo R">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-ans" onclick="toggleSolution('sol30-7')">Xem hướng dẫn giải chi tiết</button>
+                </div>
+                <div id="sol30-7" class="solution-box">
+                    <strong>Tóm tắt chứng minh & Tính toán:</strong><br>
+                    a) Vì \(I\) là trung điểm dây \(CD \rightarrow OI \perp CD\) tại \(I \rightarrow \widehat{AIO} = 90^\circ\)[cite: 328, 329]. Do \(\widehat{AMO} = 90^\circ\), tứ giác nội tiếp đường tròn tâm \(K\) đường kính \(AO\)[cite: 330, 331].<br>
+                    b) Sử dụng tính chất tam giác đồng dạng ghép cặp: \(\Delta FAM \sim \Delta FNI \Rightarrow FA \cdot FI = FM \cdot FN\) và \(\Delta FMC \sim \Delta FDN \Rightarrow FM \cdot FN = FC \cdot FD\) từ đó suy ra điều phải chứng minh.<br>
+                    c) Diện tích cần tìm bằng diện tích tứ giác \(AMON\) trừ đi diện tích hình quạt tròn tâm \(O\) của cung nhỏ \(MN\). Khi \(AM = 2R\), dùng lượng giác tính góc ở tâm rồi thay công thức diện tích quạt tròn để tính ra kết quả chuẩn xác theo \(R\).
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="exercise-box">
-    <p><strong>Bài 5. (1,0 điểm)</strong> Một lon nước ngọt có dạng hình trụ có đường kính mặt trong của đáy là 6,5 cm chứa 355 ml nước ngọt...</p>
-    <div class="image-container">
-        <img src="images/De24.Bai5.jpg" alt="Hình minh họa Bài 5 Đề 24" class="exercise-img">
-    </div>
-</div>
+<script>
+    // Hàm xử lý chuyển tab mượt mà giữa các đề thi
+    function switchExam(examId, element) {
+        // Ẩn tất cả panels
+        const panels = document.querySelectorAll('.exam-panel');
+        panels.forEach(panel => panel.classList.remove('active'));
+        
+        // Bỏ class active ở tất cả các nút tab
+        const tabs = document.querySelectorAll('.tab-btn');
+        tabs.forEach(tab => tab.classList.remove('active'));
+        
+        // Hiển thị panel được chọn và kích hoạt nút tương ứng
+        document.getElementById(examId).classList.add('active');
+        element.classList.add('active');
+    }
 
-<div class="exercise-box">
-    <p><strong>Bài 3. (1,5 điểm)</strong> Biểu đồ cột dưới đây biểu diễn xếp loại học tập HK1 của các học sinh lớp 9A.</p>
-    <div class="image-container">
-        <img src="images/De30.Bai3.png" alt="Biểu đồ cột học lực lớp 9A" class="exercise-img">
-    </div>
-</div>
+    // Hàm ẩn/hiển thị linh hoạt phần đáp án chi tiết khi bấm nút
+    function toggleSolution(solId) {
+        const solBox = document.getElementById(solId);
+        if (solBox.classList.contains('visible')) {
+            solBox.classList.remove('visible');
+        } else {
+            solBox.classList.add('visible');
+            // Yêu cầu MathJax cập nhật lại công thức toán học nếu có nội dung mới hiển thị
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([solBox]);
+            }
+        }
+    }
+</script>
 
-<div class="exercise-box">
-    <p><strong>Bài 4. (1,0 điểm)</strong> Mặt trước một căn biệt thự là một khu vườn hình vuông có cạnh là a (m)...</p>
-    <div class="image-container">
-        <img src="images/De30.Bai4.png" alt="Sơ đồ khu vườn và đài phun nước Đề 30" class="exercise-img">
-    </div>
-</div>
+</body>
+</html>
