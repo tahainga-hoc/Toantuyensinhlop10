@@ -1,0 +1,54 @@
+// ĐOẠN CODE ĐIỀU KHIỂN BẬT POPUP VIDEO ĐÃ ĐƯỢC TÍCH HỢP LINK YOUTUBE CỦA BẠN
+function openVideoModal(videoFileId, titleText) {
+    const modal = document.getElementById('videoModal');
+    const player = document.getElementById('youtubePlayer');
+    const title = document.getElementById('modalVideoTitle');
+    
+    // Cập nhật tiêu đề hộp thoại bổ trợ kiến thức nền
+    title.innerHTML = `<i class="fa-solid fa-brain" style="color:var(--primary)"></i> Bổ trợ: ${titleText}`;
+    
+    // Khởi tạo biến lưu trữ ID thực tế
+    let youtubeId = ""; 
+    
+    // Hệ thống tự động phân phối mã nhúng chính xác dựa trên nút học sinh bấm
+    switch(videoFileId) {
+        case "VIDEO_TOAN10_VIET":
+            youtubeId = "3_T_8jF6li8"; // Video hệ thức Vi-ét cơ bản
+            break;
+        case "VIDEO_TOAN10_VIET_NC":
+            youtubeId = "LApq7sBxfvM"; // Video Vi-ét nâng cao/hạ bậc biến đổi
+            break;
+        case "VIDEO_TOAN10_XACSUAT":
+            youtubeId = "9RlAs0vWieg"; // Video tổng ôn thống kê và xác suất
+            break;
+        case "VIDEO_TOAN10_HAMSO":
+            youtubeId = "aFfLMdp_1QE"; // Video phương trình hoành độ giao điểm (d) và (P)
+            break;
+        case "VIDEO_TOAN10_HOAHOC":
+            youtubeId = "Ezod4u9Bygo"; // Video cách tính nồng độ phần trăm C%
+            break;
+        case "VIDEO_TOAN10_HOAHOC_NỀN":
+            youtubeId = "5Gi0-kxhXJg"; // Video phân biệt chất tan - dung môi - dung dịch
+            break;
+        case "VIDEO_TOAN10_HINHTRU":
+            youtubeId = "c1OTmwRc0oE"; // Video tính diện tích đáy và chiều cao hình trụ
+            break;
+        case "VIDEO_TOAN10_NONCUT":
+            youtubeId = "4X8OxZbZrow"; // Video công thức diện tích/thể tích nón cụt
+            break;
+        case "VIDEO_TOAN10_TUGIAC":
+            youtubeId = "fg38TFRJsJk"; // Video lý thuyết tứ giác nội tiếp
+            break;
+        case "VIDEO_TOAN10_DONGDANG":
+            youtubeId = "YbOUkoS2-Qw"; // Video 3 trường hợp đồng dạng tam giác
+            break;
+        default:
+            youtubeId = "dQw4w9WgXcQ"; // Video dự phòng nếu lỗi hệ thống
+    }
+
+    // Gán link nhúng chuẩn kèm tham số tự động phát (autoplay=1) và ẩn gợi ý video liên quan (rel=0)
+    player.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0`;
+    
+    // Hiển thị mượt mà hộp thoại lên màn hình
+    modal.style.display = "flex";
+}
